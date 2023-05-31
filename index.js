@@ -18,15 +18,15 @@ if (process.env.WEBSITE_SITE_NAME) {
 
 */
 
-/*
 
 
-console.log("base", process.env.base);
-console.log("NODE_ENV", process.env.NODE_ENV);
+
+//console.log("base", process.env.base);
+//console.log("NODE_ENV", process.env.NODE_ENV);
 
 require("./base-orm/sqlite-init"); // crear base si no existe
 
-*/
+
 
 // crear servidor
 const app = express();

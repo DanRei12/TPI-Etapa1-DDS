@@ -10,10 +10,9 @@ async function CrearBaseSiNoExiste() {
   let existe = false;
   let res = null;
 
-  res = await db.get(
-    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'alumnos'",
-    []
-  );
+  
+  sqlAlumnos= "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'alumnos'",
+  res = await db.get(sqlAlumnos, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
@@ -38,8 +37,8 @@ async function CrearBaseSiNoExiste() {
   }
 
   existe = false;
-  sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'profesores'";
-  res = await db.get(sql, []);
+  sqlProfesores = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'profesores'";
+  res = await db.get(sqlProfesores, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
@@ -74,8 +73,8 @@ async function CrearBaseSiNoExiste() {
       
       
       existe = false;
-      sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
-      res = await db.get(sql, []);
+      sqlComisiones = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'comisiones'";
+      res = await db.get(sqlComisiones, []);
       if (res.contar > 0) existe = true;
       if (!existe) {
         await db.run(
@@ -110,8 +109,8 @@ async function CrearBaseSiNoExiste() {
         
         
         existe = false;
-        sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'materias'";
-        res = await db.get(sql, []);
+        sqlMaterias = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'materias'";
+        res = await db.get(sqlMaterias, []);
         if (res.contar > 0) existe = true;
         if (!existe) {
           await db.run(
@@ -151,8 +150,8 @@ async function CrearBaseSiNoExiste() {
           
           
         existe = false;
-        sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'examenes'";
-        res = await db.get(sql, []);
+        sqlExamenes = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'examenes'";
+        res = await db.get(sqlExamenes, []);
         if (res.contar > 0) existe = true;
         if (!existe) {
           await db.run(
