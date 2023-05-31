@@ -11,8 +11,8 @@ async function CrearBaseSiNoExiste() {
   let res = null;
 
   res = await db.get(
-    //"SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'usuarios'",
-    //[]
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'usuarios'",
+    []
   );
   if (res.contar > 0) existe = true;
   if (!existe) {
@@ -26,8 +26,7 @@ async function CrearBaseSiNoExiste() {
   }
 
   existe = false;
-  sql =
-    //"SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
+  sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
   res = await db.get(sql, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
@@ -52,7 +51,7 @@ async function CrearBaseSiNoExiste() {
 
 
 existe = false;
-sql = //"SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
+sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
 res = await db.get(sql, []);
 if (res.contar > 0) existe = true;
 if (!existe) {
@@ -75,7 +74,7 @@ if (!existe) {
 
 
 existe = false;
-sql = //"SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
+sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
 res = await db.get(sql, []);
 if (res.contar > 0) existe = true;
 if (!existe) {
@@ -104,7 +103,7 @@ if (!existe) {
 
 
 existe = false;
-sql = //"SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
+sql = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'articulos'";
 res = await db.get(sql, []);
 if (res.contar > 0) existe = true;
 if (!existe) {
