@@ -9,7 +9,15 @@ const alumnos = sequelize.define(
     {
         legajoAlumno: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
+            validate: {
+                notNull: {
+                  args: true,
+                  msg: "El legajo del alumno es requerido",
+                }
+            },
+
           },
           nombre: {
             type: DataTypes.STRING(10),
