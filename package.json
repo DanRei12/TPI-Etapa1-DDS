@@ -1,0 +1,18 @@
+{
+  "name": "tpi-etapa-1",
+  "version": "1.0.0",
+  "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://labsys.frc.utn.edu.ar/gitlab/desarrollo-de-software1/tpis-2023/3k4-grupo-6/tpi-etapa-1.git"
+  },
+  "author": "aguero83503",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
