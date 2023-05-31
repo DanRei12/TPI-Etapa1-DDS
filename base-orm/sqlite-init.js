@@ -16,14 +16,14 @@ async function CrearBaseSiNoExiste() {
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      "CREATE TABLE alumnos ( legajoAlumno INT, nombre	VARCHAR(10) NOT NULL, apellido VARCHAR(10) NOT NULL, fechaIncripcion DATETIME NOT NULL, descripcion VARCHAR(50), PRIMARY KEY(legajoAlumno));"
+      "CREATE TABLE alumnos ( legajoAlumno INT NOT NULL, nombre	VARCHAR(10) NOT NULL, apellido VARCHAR(10) NOT NULL, fechaIncripcion DATETIME NOT NULL, descripcion VARCHAR(50), PRIMARY KEY(legajoAlumno));"
     );
     console.log("tabla alumnos creada!");
     await db.run(
       `INSERT INTO alumnos (legajoAlumno, nombre, apellido, fechaIncripcion, descripcion)
       VALUES (83231, 'Juan', 'Ramonda', '10-12-2019 09:15:00', 'Estudiante destacado'),
         (82345, 'Federica', 'López', '20-11-2019 09:15:00', 'Estudiante destacado'),
-        (80203, 'Carlos', 'Rodríguez', '15-11-2018 09:15:00', ''Estudiante promedio'),
+        (80203, 'Carlos', 'Rodríguez', '15-11-2018 09:15:00', 'Estudiante promedio'),
         (79023, 'Ana', 'Zabala', '20-11-2018 09:15:00', 'Estudiante destacado'),
         (85314, 'Laura', 'Torres', '27-11-2020 09:15:00', 'Estudiante promedio'),
         (90223, 'Diego', 'Damiani', '30-11-2021 09:15:00', 'Estudiante promedio'),

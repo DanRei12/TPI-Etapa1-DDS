@@ -52,7 +52,7 @@ app.use(cors({
 //   next();
 // }
 
-/*
+
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser()); // entiende cookies
@@ -64,7 +64,7 @@ app.use(express.json()); // para poder leer json en el body
 // sirve archivos estaticos
 app.use("/", express.static(path.join(__dirname, "public")));
 
-*/
+
 
 /*
 
