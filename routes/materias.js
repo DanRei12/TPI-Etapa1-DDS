@@ -19,7 +19,7 @@ router.get("/api/materias", async function(req, res, next){
 });
 
 // Obtener materia según id
-router.get("/api/materias/:id", async function(req, res, next) {
+router.get("/api/materias/:nroMateria", async function(req, res, next) {
     let mat = await db.materias.findOne({
         attributes: [
             "nroMateria",
@@ -58,7 +58,7 @@ router.post("/api/materias/", async (req, res) =>{
 });
 
 // Cambiar contenido de una materia
-router.put("/api/materias/:id", async (req, res) => {
+router.put("/api/materias/:nroMateria", async (req, res) => {
     try {
         let mat = await db.materias.findOne({
             attributes: [
@@ -96,7 +96,7 @@ router.put("/api/materias/:id", async (req, res) => {
 });
 
 // Eliminacion de una materia
-router.delete("/api/materias/:id", async (req, res) => {
+router.delete("/api/materias/:nroMateria", async (req, res) => {
     let bajaFisica = false;
 
     if(bajaFisica) {
