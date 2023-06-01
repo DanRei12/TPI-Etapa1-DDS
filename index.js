@@ -18,7 +18,11 @@ if (process.env.WEBSITE_SITE_NAME) {
 
 */
 
+const alumnosRouter = require("./routers/alumnos")
+app.use(alumnosRouter);
 
+const profesoresRouter = require("./routers/profesores")
+app.use(profesoresRouter);
 
 
 //console.log("base", process.env.base);
@@ -30,6 +34,8 @@ require("./base-orm/sqlite-init"); // crear base si no existe
 
 // crear servidor
 const app = express();
+
+
 
 // seguridad XSS
 //const helmet = require('helmet');
@@ -121,7 +127,7 @@ app.use(_404Handler);
 
 */
 
-/*
+
 
 //------------------------------------
 //-- INICIO ---------------------------
@@ -136,5 +142,3 @@ if (!module.parent) {   // si no es llamado por otro modulo, es decir, si es el 
 }
 
 module.exports = app; // para testing
-
-*/
