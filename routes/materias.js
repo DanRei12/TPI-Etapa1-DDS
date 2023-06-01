@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Op, ValidationError} = require("sequelize");
-
 const db = require("../base-orm/sequelize-init");
+const { Op, ValidationError } = require("sequelize");
 
 // Obtener todas las materias
 router.get("/api/materias", async function(req, res, next){
@@ -47,7 +46,7 @@ router.post("/api/materias/", async (req, res) =>{
             descripcion: req.body.descripcion,
         });
         res.status(200).json(data.dataValues)
-    } catch  (e){
+    } catch (e){
         if (e instanceof ValidationError){
             let messages = '';
             e.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
