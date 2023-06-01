@@ -16,25 +16,28 @@ const materiaModificacion = {
     legajoAlumno: 75094,
     nroComision: 551,
     fechaCreacion: '12-05-2005 09:00:00',
-    descripcion: "Descripcion materia " + (( ) => (Math.random() + 1).toString(150).substring(2))(),
+    descripcion: "Matematica",
 }
 
 // Tests de la obtención de todas las materias
 describe("GET /api/materias", function () {
-    it("Devolveria todas las materias", async function () {
+    it("Debería devolver todas las materias", async function () {
         const res = await request(app).get("/api/materias");
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({
-                    nroMateria: expect.any(Number),
-                    legajoProfesor: expect.any(Number),
-                    legajoAlumno: expect.any(Number),
-                    nroComision: expect.any(Number),
-                    fechaCreacion: expect.any(String),
-                    descripcion: expect.any(String),
-                }),
-            ]),
+            expect.objectContaining({
+                rows: expect.arrayContaining([
+                    expect.objectContaining({
+                        nroMateria: expect.any(Number),
+                        legajoProfesor: expect.any(Number),
+                        legajoAlumno: expect.any(Number),
+                        nroComision: expect.any(Number),
+                        fechaCreacion: expect.any(String),
+                        descripcion: expect.any(String),
+                    }),
+                ]),
+                count: expect.any(Number) 
+            })
         );
     });
 });
@@ -60,7 +63,7 @@ describe("GET /api/materias/:id", function () {
 // Tests para agregar una materia
 describe("POST /api/materias", () => {
     it("Deberia devolver la materia que se acaba de crear", async () => {
-        const res = (await request(app).post("/api/materias")).send(nuevaMateria);
+        const res = await request(app).post("/api/materias/").send(nuevaMateria);
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual(
             expect.objectContaining({
@@ -78,7 +81,7 @@ describe("POST /api/materias", () => {
 // Tests para actualizar una materia
 describe("PUT /api/materias/:id", () => {
     it("Deberia devolver la materia con el número 24 modificado", async () => {
-        const res = await request(app).put("/api/materias/24".send(materiaModificacion));
+        const res = await request(app).put("/api/materias/24").send(materiaModificacion);
         expect(res.statusCode).toEqual(200);
     });
 });
@@ -86,7 +89,8 @@ describe("PUT /api/materias/:id", () => {
 // Tests para eliminar una materia
 describe("DELETE /api/materias/10", () => {
     it("Debería devolver la materia con el número 24 borrado", async () => {
-        const res = (await request(app).delete("/api/materias/24"));
+        const res = await request(app).delete("/api/materias/24");
         expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({});
     });
 });
