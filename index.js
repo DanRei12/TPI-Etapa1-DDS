@@ -1,4 +1,3 @@
-
 require("express-async-errors"); // captura errores en promesas, usar async await
 const express = require("express");
 const path = require("path");
@@ -17,7 +16,6 @@ const app = express();
 //app.use(helmet());
 
 
-
 // var allowCrossDomain = function(req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -26,15 +24,12 @@ const app = express();
 // }
 
 
-
 app.use(express.text()); // entiende texto
-app.use(express.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({extended: false})); // for parsing application/x-www-form-urlencoded
 app.use(express.json()); // para poder leer json en el body
 
 // sirve archivos estaticos
 app.use("/", express.static(path.join(__dirname, "public")));
-
-
 
 
 //------------------------------------
@@ -76,8 +71,9 @@ app.use(materiasRouters);
 const examenesRouters = require("./routes/examenes");
 app.use(examenesRouters);
 
-//const comisionesRouters = require("./routes/comisiones");
-//app.use(comisionesRouters);
+const comisionesRouters = require("./routes/comisiones");
+app.use(comisionesRouters);
+console.log(new Date(), 'fecha')
 
 
 
@@ -93,17 +89,16 @@ app.use(_404Handler);
 */
 
 
-
 //------------------------------------
 //-- INICIO ---------------------------
 //------------------------------------
 
 if (!module.parent) {   // si no es llamado por otro modulo, es decir, si es el modulo principal -> levantamos el servidor
-  const port = process.env.PORT || 3000;   // en produccion se usa el puerto de la variable de entorno PORT
-  app.locals.fechaInicio = new Date();
-  app.listen(port, () => {
-    console.log(`sitio escuchando en el puerto ${port}`);
-  });
+    const port = process.env.PORT || 3000;   // en produccion se usa el puerto de la variable de entorno PORT
+    app.locals.fechaInicio = new Date();
+    app.listen(port, () => {
+        console.log(`sitio escuchando en el puerto ${port}`);
+    });
 }
 
 module.exports = app; // para testing
