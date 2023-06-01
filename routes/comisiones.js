@@ -25,8 +25,9 @@ router.post("/api/comisiones/", async (req, res) => {
         const {nroComision, fechaCreacion, descripcion} = req.body;
         const data = await db.comisiones.create({
             nroComision, fechaCreacion, descripcion
+        }).then(()=>{
+            res.status(200).json(data.dataValues);
         });
-        res.status(200).json(data.dataValues);
     } catch (err) {
         if (err instanceof ValidationError) {
             let messages = "";
