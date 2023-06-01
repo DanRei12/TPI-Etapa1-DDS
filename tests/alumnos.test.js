@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../index");
 const alumnoAlta = {
-  legajoAlumno: 79024,
+  LegajoAlumno: 79024,
   Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   FechaInscripcion: new Date().toISOString(),
@@ -9,7 +9,7 @@ const alumnoAlta = {
   
 };
 const alumnoModificacion = {
-    legajoAlumno: 79023,
+    LegajoAlumno: 79023,
     Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     FechaInscripcion: new Date().toISOString(),
@@ -54,7 +54,7 @@ describe("GET /api/alumnos/:legajoAlumno", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        legajoAlumno: expect.any(Number),
+        LegajoAlumno: expect.any(Number),
         Nombre: expect.any(String),
         Apellido: expect.any(String),           
         FechaInscripcion: expect.any(String),
@@ -71,10 +71,10 @@ describe("POST /api/alumnos", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        legajoAlumno: expect.any(Number),
+        LegajoAlumno: expect.any(Number),
         Nombre: expect.any(String),
         Apellido: expect.any(String),           
-        fechaInscripcion: expect.any(String),
+        FechaInscripcion: expect.any(String),
         Descripcion: expect.any(String),
       })
     );

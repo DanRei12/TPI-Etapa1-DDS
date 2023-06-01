@@ -1,29 +1,11 @@
 
-require("express-async-errors"); // captura errores en promesas, usar async await
+require("express-async-errors"); //captura errores en promesas, usar async await
 const express = require("express");
 const path = require("path");
 require("./base-orm/sqlite-init"); // crear base si no existe
 
 // crear servidor
 const app = express();
-
-
-//console.log("base", process.env.base);
-//console.log("NODE_ENV", process.env.NODE_ENV);
-
-
-// seguridad XSS
-//const helmet = require('helmet');
-//app.use(helmet());
-
-
-
-// var allowCrossDomain = function(req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-//   //res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// }
 
 
 
@@ -37,32 +19,42 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 
 
-//------------------------------------
-//-- SWAGGER
-//------------------------------------
+
+//console.log("base", process.env.base);
+//console.log("NODE_ENV", process.env.NODE_ENV);
+
+
+// seguridad XSS
+//const helmet = require('helmet');
+//app.use(helmet());
+
 
 /*
-const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger/swagger_output.json"); //aqui se genera la salida
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
+var allowCrossDomain = function(req, res, next) {
+   res.setHeader('Access-Control-Allow-Origin', '*');
+   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+   next();
+ }
 */
 
 
-/*
+
+
 
 //------------------------------------
 //-- RUTAS ---------------------------
 //------------------------------------
+/*
 app.get("/", (req, res) => {
-  //res.send("sitio on line, hola mundo!");
-  //res.json({message: 'sitio on line'});
-  //res.sendfile("./public/index.html");
-  //res.sendfile("./img/imagen.jpg");
+  res.send("sitio on line, hola mundo!");
+  res.json({message: 'sitio on line'});
+  res.sendfile("./public/index.html");
+  res.sendfile("./img/imagen.jpg");
   res.redirect("/index.html"); // no haria falta, valor por defecto usado por express.static
 });
-
 */
+
 
 const alumnosRouters = require("./routes/alumnos");
 app.use(alumnosRouters);

@@ -16,21 +16,21 @@ async function CrearBaseSiNoExiste() {
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
-      "CREATE TABLE alumnos ( legajoAlumno INT NOT NULL, nombre	VARCHAR(10) NOT NULL, apellido VARCHAR(10) NOT NULL, fechaInscripcion DATETIME NOT NULL, descripcion VARCHAR(50), PRIMARY KEY(legajoAlumno));"
+      "CREATE TABLE alumnos ( legajoAlumno INT NOT NULL, nombre	VARCHAR(10) NOT NULL, apellido VARCHAR(10) NOT NULL, fechaInscripcion DATE NOT NULL, descripcion VARCHAR(50), PRIMARY KEY(legajoAlumno));"
     );
     console.log("tabla alumnos creada!");
     await db.run(
       `INSERT INTO alumnos (legajoAlumno, nombre, apellido, fechaInscripcion, descripcion)
-      VALUES (83231, 'Juan', 'Ramonda', '2019-12-10 09:15:00', 'Estudiante destacado'),
-      (82345, 'Federica', 'López', '2019-11-20 09:15:00', 'Estudiante destacado'),
-      (80203, 'Carlos', 'Rodríguez', '2018-11-15 09:15:00', 'Estudiante promedio'),
-      (79023, 'Ana', 'Zabala', '2018-11-20 09:15:00', 'Estudiante destacado'),
-      (85314, 'Laura', 'Torres', '2020-11-27 09:15:00', 'Estudiante promedio'),
-      (90223, 'Diego', 'Damiani', '2021-11-30 09:15:00', 'Estudiante promedio'),
-      (75231, 'Sofía', 'Palacios', '2017-11-28 09:15:00', 'Estudiante destacado'),
-      (75094, 'javier', 'Valdez', '2017-12-01 09:15:00', 'Estudiante destacado'),
-      (91456, 'Valeria', 'Molinas', '2021-11-05 09:15:00', 'Estudiante promedio'),
-      (89412, 'Joaquín', 'Pelosi', '2020-11-19 09:15:00', 'Estudiante destacado');  
+      VALUES (83231, 'Juan', 'Ramonda', '2019-12-10', 'Estudiante destacado'),
+      (82345, 'Federica', 'López', '2019-11-20', 'Estudiante destacado'),
+      (80203, 'Carlos', 'Rodríguez', '2018-11-15', 'Estudiante promedio'),
+      (79023, 'Ana', 'Zabala', '2018-11-20', 'Estudiante destacado'),
+      (85314, 'Laura', 'Torres', '2020-11-27', 'Estudiante promedio'),
+      (90223, 'Diego', 'Damiani', '2021-11-30', 'Estudiante promedio'),
+      (75231, 'Sofía', 'Palacios', '2017-11-28', 'Estudiante destacado'),
+      (75094, 'javier', 'Valdez', '2017-12-01', 'Estudiante destacado'),
+      (91456, 'Valeria', 'Molinas', '2021-11-05', 'Estudiante promedio'),
+      (89412, 'Joaquín', 'Pelosi', '2020-11-19', 'Estudiante destacado');  
       `
       
     );
