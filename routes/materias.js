@@ -6,16 +6,7 @@ const db = require("../base-orm/sequelize-init");
 
 // Obtener todas las materias
 router.get("/api/materias", async function(req, res, next){
-    let where = {};
-    if (req.query.Nombre != undefined && req.query.Nombre !== ""){
-        where.Nombre = {
-        [Op.like]: "%" + req.query.Nombre + "%",
-        };
-    }
-    // Falta true o false de alguna condición a validar
-    const Pagina = req.query.Pagina ?? 1;
-    const TamañoPagina = 10;
-    const {count, rows} = await db.materias.findAndCountAll ({
+    let mat = await db.materias.findAndCountAll ({
         attributes: [
             "nroMateria",
             "legajoProfesor",
@@ -24,16 +15,12 @@ router.get("/api/materias", async function(req, res, next){
             "fechaCreacion",
             "descripcion",
         ],
-        order: [["nroMateria", "ASC"]],
-        where,
-        offset: (Pagina - 1) * TamañoPagina,
-        limit: TamañoPagina,
     });
-    return res.json({Materias: rows, RegistrosTotal: count});
+    res.json(mat);
 });
 
 // Obtener materia según id
-router.get("/api/articulos/:id", async function(req, res, next) {
+router.get("/api/materias/:id", async function(req, res, next) {
     let mat = await db.materias.findOne({
         attributes: [
             "nroMateria",
@@ -49,15 +36,15 @@ router.get("/api/articulos/:id", async function(req, res, next) {
 });
 
 // Agregar una nueva materia
-router.post("/api/articulos/", async (req, res) =>{
+router.post("/api/materias/", async (req, res) =>{
     try {
         let data = await db.materias.create({
-            NumeroMateria: req.body.nroMateria,
-            LegProfesor: req.body.legajoProfesor,
-            LegAlumno: req.body.legajoAlumno,
-            NumeroComision: req.body.nroComision,
-            FechaCreacion: req.body.fechaCreacion,
-            Descripcion: req.body.descripcion,
+            nroMateria: req.body.nroMateria,
+            legajoProfesor: req.body.legajoProfesor,
+            legajoAlumno: req.body.legajoAlumno,
+            nroComision: req.body.nroComision,
+            fechaCreacion: req.body.fechaCreacion,
+            descripcion: req.body.descripcion,
         });
         res.status(200).json(data.dataValues)
     } catch  (e){
@@ -72,7 +59,7 @@ router.post("/api/articulos/", async (req, res) =>{
 });
 
 // Cambiar contenido de una materia
-router.put("/api/articulos/:id", async (req, res) => {
+router.put("/api/materias/:id", async (req, res) => {
     try {
         let mat = await db.materias.findOne({
             attributes: [
@@ -110,7 +97,7 @@ router.put("/api/articulos/:id", async (req, res) => {
 });
 
 // Eliminacion de una materia
-router.delete("/api/articulos/:id", async (req, res) => {
+router.delete("/api/materias/:id", async (req, res) => {
     let bajaFisica = false;
 
     if(bajaFisica) {

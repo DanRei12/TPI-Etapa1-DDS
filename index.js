@@ -1,7 +1,10 @@
 // require("express-async-errors"); // captura errores en promesas, usar async await
 const express = require("express");
 const path = require("path");
+const materiasRouter = require("./routes/materias")
 
+// crear servidor
+const app = express();
 
 /*
 
@@ -18,14 +21,7 @@ if (process.env.WEBSITE_SITE_NAME) {
 }
 
 */
-
-
-
-
-
-
-
-const materiasRouter = require("./routes/materias")
+app.use(express.json())
 app.use(materiasRouter);
 
 //console.log("base", process.env.base);
@@ -34,9 +30,6 @@ app.use(materiasRouter);
 require("./base-orm/sqlite-init"); // crear base si no existe
 
 
-
-// crear servidor
-const app = express();
 
 // seguridad XSS
 //const helmet = require('helmet');
@@ -59,7 +52,7 @@ app.use(cors({
 //   next();
 // }
 
-
+/*
 
 const cookieParser = require("cookie-parser");
 app.use(cookieParser()); // entiende cookies
@@ -70,7 +63,7 @@ app.use(express.json()); // para poder leer json en el body
 
 // sirve archivos estaticos
 app.use("/", express.static(path.join(__dirname, "public")));
-
+*/
 
 
 /*
