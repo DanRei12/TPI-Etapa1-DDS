@@ -76,7 +76,7 @@ router.post("/api/alumnos/", async (req, res) => {
   }
 });
 
-router.put("/api/alumnos/:id", async (req, res) => {
+router.put("/api/alumnos/:legajoAlumno", async (req, res) => {
   
   try {
     let alumno1 = await db.alumnos.findOne({
@@ -115,7 +115,7 @@ router.put("/api/alumnos/:id", async (req, res) => {
   }
 });
 
-router.delete("/api/alumnos/:id", async (req, res) => {
+router.delete("/api/alumnos/:legajoAlumno", async (req, res) => {
   
   let bajaFisica = false;
 

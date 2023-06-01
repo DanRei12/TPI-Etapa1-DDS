@@ -21,16 +21,16 @@ async function CrearBaseSiNoExiste() {
     console.log("tabla alumnos creada!");
     await db.run(
       `INSERT INTO alumnos (legajoAlumno, nombre, apellido, fechaIncripcion, descripcion)
-      VALUES (83231, 'Juan', 'Ramonda', '10-12-2019 09:15:00', 'Estudiante destacado'),
-        (82345, 'Federica', 'López', '20-11-2019 09:15:00', 'Estudiante destacado'),
-        (80203, 'Carlos', 'Rodríguez', '15-11-2018 09:15:00', 'Estudiante promedio'),
-        (79023, 'Ana', 'Zabala', '20-11-2018 09:15:00', 'Estudiante destacado'),
-        (85314, 'Laura', 'Torres', '27-11-2020 09:15:00', 'Estudiante promedio'),
-        (90223, 'Diego', 'Damiani', '30-11-2021 09:15:00', 'Estudiante promedio'),
-        (75231, 'Sofía', 'Palacios', '28-11-2017 09:15:00', 'Estudiante destacado'),
-        (75094, 'javier', 'Valdez', '01-12-2017 09:15:00', 'Estudiante destacado'),
-        (91456, 'Valeria', 'Molinas', '05-11-2021 09:15:00', 'Estudiante promedio'),
-        (89412, 'Joaquín', 'Pelosi', '19-11-2020 09:15:00', 'Estudiante destacado');    
+      VALUES (83231, 'Juan', 'Ramonda', '2019-12-10 09:15:00', 'Estudiante destacado'),
+      (82345, 'Federica', 'López', '2019-11-20 09:15:00', 'Estudiante destacado'),
+      (80203, 'Carlos', 'Rodríguez', '2018-11-15 09:15:00', 'Estudiante promedio'),
+      (79023, 'Ana', 'Zabala', '2018-11-20 09:15:00', 'Estudiante destacado'),
+      (85314, 'Laura', 'Torres', '2020-11-27 09:15:00', 'Estudiante promedio'),
+      (90223, 'Diego', 'Damiani', '2021-11-30 09:15:00', 'Estudiante promedio'),
+      (75231, 'Sofía', 'Palacios', '2017-11-28 09:15:00', 'Estudiante destacado'),
+      (75094, 'javier', 'Valdez', '2017-12-01 09:15:00', 'Estudiante destacado'),
+      (91456, 'Valeria', 'Molinas', '2021-11-05 09:15:00', 'Estudiante promedio'),
+      (89412, 'Joaquín', 'Pelosi', '2020-11-19 09:15:00', 'Estudiante destacado');  
       `
       
     );
@@ -91,16 +91,16 @@ async function CrearBaseSiNoExiste() {
       await db.run(
         `
         INSERT INTO comisiones (nroComision, fechaCreacion, descripcion)
-        VALUES (551, '02-02-2005 09:00:00', 'Comisión A'),
-        (234, '23-01-2009 10:25:00', 'Comisión K'),
-        (125, '21-01-2010 13:15:00', 'Comisión J'),
-        (281, '23-03-2018 20:21:00', 'Comisión Q'),
-        (923, '24-02-2014 15:55:00', 'Comisión I'),
-        (123, '12-07-2013 19:23:00', 'Comisión H'),
-        (238, '12-02-2011 12:56:00', 'Comisión G'),
-        (568, '19-07-2020 11:30:00', 'Comisión F'),
-        (793, '21-02-2021 17:70:00', 'Comisión E'),
-        (357, '01-03-2023 16:50:00', 'Comisión C');
+        VALUES (551, '2005-02-02 09:00:00', 'Comisión A'),
+        (234, '2009-01-23 10:25:00', 'Comisión K'),
+        (125, '2010-01-21 13:15:00', 'Comisión J'),
+        (281, '2018-03-23 20:21:00', 'Comisión Q'),
+        (923, '2014-02-24 15:55:00', 'Comisión I'),
+        (123, '2013-07-12 19:23:00', 'Comisión H'),
+        (238, '2011-02-12 12:56:00', 'Comisión G'),
+        (568, '2020-07-19 11:30:00', 'Comisión F'),
+        (793, '2021-02-21 17:70:00', 'Comisión E'),
+        (357, '2023-03-01 16:50:00', 'Comisión C');
         ` 
         
         );
@@ -133,16 +133,16 @@ async function CrearBaseSiNoExiste() {
         await db.run(
           `
           INSERT INTO materias (nroMateria, legajoProfesor, legajoAlumno, nroComision, fechaCreacion, descripcion)
-          VALUES (24, 10231, 75094, 551, '12-05-2005 09:00:00', 'Algebra'),
-          (20, 11235, 75231, 234, '20-05-2010 19:00:00', 'Desarrollo de Software'),
-          (10, 12355, 79023, 125, '10-05-2009 09:34:00', 'Ciber Seguridad'),
-          (15, 15246, 80203, 281, '10-06-2002 10:23:00', 'Física 1'),
-          (29, 17235, 82345, 923, '24-06-2015 11:12:00', 'Física 2'),
-          (46, 20241, 82460, 123, '18-05-2016 15:45:00', 'Química'),
-          (50, 12345, 83231, 238, '13-06-2017 14:51:00', 'Análisis Numerico'),
-          (12, 25234, 85314, 568, '19-05-2018 13:32:00', 'Diseño de Sistemas de Información'),
-          (09, 28414, 89412, 793, '11-05-2019 20:33:00', 'Inglés 1'),
-          (35, 30123, 90223, 357, '10-06-2013 17:42:00', 'Inglés 2');
+          VALUES (24, 10231, 75094, 551, '2005-12-05 09:00:00', 'Algebra'),
+          (20, 11235, 75231, 234, '2010-05-20 19:00:00', 'Desarrollo de Software'),
+          (10, 12355, 79023, 125, '2009-05-10 09:34:00', 'Ciber Seguridad'),
+          (15, 15246, 80203, 281, '2002-06-10 10:23:00', 'Física 1'),
+          (29, 17235, 82345, 923, '2015-06-24 11:12:00', 'Física 2'),
+          (46, 20241, 82460, 123, '2016-05-18 15:45:00', 'Química'),
+          (50, 12345, 83231, 238, '2017-06-13 14:51:00', 'Análisis Numerico'),
+          (12, 25234, 85314, 568, '2018-05-19 13:32:00', 'Diseño de Sistemas de Información'),
+          (09, 28414, 89412, 793, '2019-05-11 20:33:00', 'Inglés 1'),
+          (35, 30123, 90223, 357, '2013-06-10 17:42:00', 'Inglés 2');
 
           `
           );
@@ -170,17 +170,17 @@ async function CrearBaseSiNoExiste() {
           console.log("tabla examenes creada!");
           await db.run(
             `
-            INSERT INTO examenes (nroMateria, legajoAlumno, fechaExamen, descripcion)
-            VALUES (24, 75094, '20-05-2023 10:00:00', 'Examen de Algebra'),
-            (20, 75231, '13-06-2023 17:45:00', 'Examen de Desarrollo de Software'),
-            (10, 79023, '25-10-2023 09:30:00', 'Examen de Ciber Seguridad'),
-            (15, 80203, '31-07-2023 14:00:00', 'Examen de Física 1'),
-            (29, 82345, '31-04-2023 17:40:00', 'Examen de Física 2'),
-            (46, 82460, '12-10-2023 20:30:00', 'Examen de Química'),
-            (50, 83231, '05-12-2023 16:30:00', 'Examen de Análisis Numerico'),
-            (12, 85314, '23-05-2023 17:30:00', 'Examen de Diseño de Sistemas de Información'),
-            (9, 89412, '15-06-2023 09:00:00', 'Examen de Inglés 1'),
-            (35, 90223, '31-05-2023 11:00:00', 'Examen de Inglés 2');
+           INSERT INTO examenes (nroMateria, legajoAlumno, fechaExamen, descripcion)
+            VALUES (24, 75094, '2023-05-20 10:00:00', 'Examen de Algebra'),
+            (20, 75231, '2023-06-13 17:45:00', 'Examen de Desarrollo de Software'),
+            (10, 79023, '2023-10-25 09:30:00', 'Examen de Ciber Seguridad'),
+            (15, 80203, '2023-07-31 14:00:00', 'Examen de Física 1'),
+            (29, 82345, '2023-04-31 17:40:00', 'Examen de Física 2'),
+            (46, 82460, '2023-10-12 20:30:00', 'Examen de Química'),
+            (50, 83231, '2023-12-05 16:30:00', 'Examen de Análisis Numerico'),
+            (12, 85314, '2023-05-23 17:30:00', 'Examen de Diseño de Sistemas de Información'),
+            (9, 89412, '2023-06-15 09:00:00', 'Examen de Inglés 1'),
+            (35, 90223, '2023-05-31 11:00:00', 'Examen de Inglés 2');
             
             `
             );

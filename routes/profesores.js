@@ -37,7 +37,7 @@ router.get("/api/profesores", async function (req, res, next) {
     
   });
 
-router.get("/api/profesores/:id", async function (req, res, next) {
+router.get("/api/profesores/:legajoProfesor", async function (req, res, next) {
    let profe = await db.profesores.findOne({
     attributes: [
         "legajoProfesor",
@@ -73,7 +73,7 @@ router.post("/api/profesores/", async (req, res) => {
   }
 });
 
-router.put("/api/profesores/:id", async (req, res) => {
+router.put("/api/profesores/:legajoProfesor", async (req, res) => {
   
   try {
     let alumno1 = await db.profesores.findOne({
@@ -110,14 +110,14 @@ router.put("/api/profesores/:id", async (req, res) => {
   }
 });
 
-router.delete("/api/profesores/:id", async (req, res) => {
+router.delete("/api/profesores/:legajoProfesor", async (req, res) => {
   
   let bajaFisica = false;
 
   if (bajaFisica) {
     // baja fisica
     let filasBorradas = await db.profesores.destroy({
-      where: { legajoProfesor: req.params.id },
+      where: { legajoProfesor: req.params.legajoProfesor},
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);

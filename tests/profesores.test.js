@@ -36,7 +36,7 @@ describe("GET /api/profesores", () => {
 });
 
 // test route/profesores/:id GET
-describe("GET /api/profesores/:id", () => {
+describe("GET /api/profesores/:legajoProfesor", () => {
   it("Deberia devolver el profesores con el id 20241", async () => {
     const res = await request(app).get("/api/profesores/:20241");
     expect(res.statusCode).toEqual(200);
@@ -68,7 +68,7 @@ describe("POST /api/profesores", () => {
 });
 
 // test route/profesores/:id PUT
-describe("PUT /api/profesores/:id", () => {
+describe("PUT /api/profesores/:legajoProfesor", () => {
   it("Deberia devolver el profesor con el legajo 20241 modificado", async () => {
     const res = await request(app).put("/api/profesores/20241").send(profesorModificacion);
     expect(res.statusCode).toEqual(200);
@@ -76,7 +76,7 @@ describe("PUT /api/profesores/:id", () => {
 });
 
 // test route/profesores/:id DELETE
-describe("DELETE /api/profesores/:id", () => {
+describe("DELETE /api/profesores/:legajoProfesor", () => {
   it("Deberia devolver el profesor con el legajo 20241 borrado", async () => {
     const res = await request(app).delete("/api/profesores/20241");
     expect(res.statusCode).toEqual(200);

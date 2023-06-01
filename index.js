@@ -6,27 +6,17 @@ require("./base-orm/sqlite-init"); // crear base si no existe
 
 // crear servidor
 const app = express();
-/*
+
 
 //console.log("base", process.env.base);
 //console.log("NODE_ENV", process.env.NODE_ENV);
-
-
 
 
 // seguridad XSS
 //const helmet = require('helmet');
 //app.use(helmet());
 
-/*
 
-// configurar servidor
-const cors = require("cors");
-app.use(cors({
-  origin: '*'    // origin: 'https://dds-frontend.azurewebsites.net'
-}));
-
-*/
 
 // var allowCrossDomain = function(req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,9 +27,6 @@ app.use(cors({
 
 
 
-//const cookieParser = require("cookie-parser");
-//app.use(cookieParser()); // entiende cookies
-
 app.use(express.text()); // entiende texto
 app.use(express.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 app.use(express.json()); // para poder leer json en el body
@@ -47,16 +34,14 @@ app.use(express.json()); // para poder leer json en el body
 // sirve archivos estaticos
 app.use("/", express.static(path.join(__dirname, "public")));
 
-const alumnosRouters = require("./routes/alumnos");
-app.use(alumnosRouters);
 
-const profesorRouters = require("./routes/profesores");
-app.use(profesorRouters);
-/*
+
 
 //------------------------------------
 //-- SWAGGER
 //------------------------------------
+
+/*
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger/swagger_output.json"); //aqui se genera la salida
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
@@ -78,6 +63,23 @@ app.get("/", (req, res) => {
 });
 
 */
+
+const alumnosRouters = require("./routes/alumnos");
+app.use(alumnosRouters);
+
+const profesorRouters = require("./routes/profesores");
+app.use(profesorRouters);
+
+const materiasRouters = require("./routes/materias");
+app.use(materiasRouters);
+
+const examenesRouters = require("./routes/examenes");
+app.use(examenesRouters);
+
+//const comisionesRouters = require("./routes/comisiones");
+//app.use(comisionesRouters);
+
+
 
 /*
 
