@@ -1,5 +1,5 @@
 // configurar ORM sequelize
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, ValidationError} = require("sequelize");
 //const sequelize = new Sequelize("sqlite:" + process.env.base );
 const sequelize = new Sequelize("sqlite:" + "./.data/BD-Tpi-DDS.db");
 
@@ -40,7 +40,7 @@ const alumnos = sequelize.define(
             },
         
           },
-          fechaIncripcion: {
+          fechaInscripcion: {
             type: DataTypes.DATE,
             allowNull: false,
             validate: {

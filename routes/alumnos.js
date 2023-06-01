@@ -1,7 +1,7 @@
+const db = require("../base-orm/sequelize-init");
 const express = require("express");
 const router = express.Router();
-const db = require("../base-orm/sequelize-init");
-//const { Op, ValidationError } = require("sequelize");
+const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
 router.get("/api/alumnos", async function (req, res, next) {
@@ -25,7 +25,7 @@ router.get("/api/alumnos", async function (req, res, next) {
         "legajoAlumno",
         "nombre",
         "apellido",
-        "fechaIncripcion",
+        "fechaInscripcion",
         "descripcion",       
       ],
       order: [["Nombre", "ASC"]],
@@ -38,16 +38,16 @@ router.get("/api/alumnos", async function (req, res, next) {
     
   });
 
-router.get("/api/alumnos/:id", async function (req, res, next) {
+router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
    let alumno1 = await db.alumnos.findOne({
     attributes: [
         "legajoAlumno",
         "nombre",
         "apellido",
-        "fechaIncripcion",
+        "fechaInscripcion",
         "descripcion",            
     ],
-    where: { legajoAlumno: req.params.id },
+    where: { legajoAlumno: req.params.legajoAlumno},
   });
   res.json(alumno1);
 });
@@ -56,11 +56,11 @@ router.post("/api/alumnos/", async (req, res) => {
   
   try {
     let data = await db.alumnos.create({
-      Legajo: req.body.legajoAlumno,
-      Nombre: req.body.nombre,
-      Apellido: req.body.apellido,
-      FechaInscripcion: req.body.fechaInscripcion,
-      Descripcion: req.body.descripcion,
+      legajoAlumno: req.body.legajoAlumno,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      fechaInscripcion: req.body.fechaInscripcion,
+      descripcion: req.body.descripcion,
       });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
@@ -84,20 +84,20 @@ router.put("/api/alumnos/:legajoAlumno", async (req, res) => {
         "legajoAlumno",
         "nombre",
         "apellido",
-        "fechaIncripcion",
+        "fechaInscripcion",
         "descripcion",   
       ],
-      where: { legajoAlumno: req.params.id },
+      where: { legajoAlumno: req.params.legajoAlumno},
     });
     if (!alumno1) {
       res.status(404).json({ message: "Alumno no encontrado" });
       return;
     }
-    alumno1.Legajo= req.body.legajoAlumno,
-    alumno1.Nombre= req.body.nombre,
-    alumno1.Apellido= req.body.apellido,
-    alumno1.FechaInscripcion= req.body.fechaInscripcion,
-    alumno1.Descripcion= req.body.descripcion,
+    alumno1.legajoAlumno= req.body.legajoAlumno,
+    alumno1.nombre= req.body.nombre,
+    alumno1.apellido= req.body.apellido,
+    alumno1.fechaInscripcion= req.body.fechaInscripcion,
+    alumno1.descripcion= req.body.descripcion,
     
     await alumno1.save();
 
@@ -122,7 +122,7 @@ router.delete("/api/alumnos/:legajoAlumno", async (req, res) => {
   if (bajaFisica) {
     // baja fisica
     let filasBorradas = await db.alumnos.destroy({
-      where: { legajoAlumno: req.params.id },
+      where: { legajoAlumno: req.params.legajoAlumno},
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);

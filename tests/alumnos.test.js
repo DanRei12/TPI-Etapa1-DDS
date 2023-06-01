@@ -13,8 +13,19 @@ const alumnoModificacion = {
     Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     FechaInscripcion: new Date().toISOString(),
-    Descripcion: "Descripcion alumno " + (( ) => (Math.random() + 1).toString(150).substring(2))(),  // Genera un nombre aleatorio
+    Descripcion: generateRandomString(150),
 };
+
+function generateRandomString(length) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 
 // test route/alumnos GET
@@ -63,7 +74,7 @@ describe("POST /api/alumnos", () => {
         legajoAlumno: expect.any(Number),
         Nombre: expect.any(String),
         Apellido: expect.any(String),           
-        FechaInscripcion: expect.any(String),
+        fechaInscripcion: expect.any(String),
         Descripcion: expect.any(String),
       })
     );
