@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../index");
 const alumnoAlta = {
+  legajoAlumno: 79024,
   Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   FechaInscripcion: new Date().toISOString(),
@@ -8,7 +9,7 @@ const alumnoAlta = {
   
 };
 const alumnoModificacion = {
-    legajoAlumno: 1,
+    legajoAlumno: 79023,
     Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     FechaInscripcion: new Date().toISOString(),
@@ -16,7 +17,7 @@ const alumnoModificacion = {
 };
 
 
-// test route/articulos GET
+// test route/alumnos GET
 describe("GET /api/alumnos", () => {
   it("Deberia devolver todos los alumnos", async () => {
     const res = await request(app).get("/api/alumnos");
@@ -35,10 +36,10 @@ describe("GET /api/alumnos", () => {
   });
 });
 
-// test route/articulos/:id GET
+// test route/alumnos/:id GET
 describe("GET /api/alumnos/:id", () => {
-  it("Deberia devolver el alumno con el id 1", async () => {
-    const res = await request(app).get("/api/alumnos/1");
+  it("Deberia devolver el alumno con el legajo 79023", async () => {
+    const res = await request(app).get("/api/alumnos/79023");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
@@ -52,7 +53,7 @@ describe("GET /api/alumnos/:id", () => {
   });
 });
 
-// test route/articulos POST
+// test route/alumnos POST
 describe("POST /api/alumnos", () => {
   it("Deberia devolver el alumno que acabo de crear", async () => {
     const res = await request(app).post("/api/alumnos").send(alumnoAlta);
@@ -69,18 +70,18 @@ describe("POST /api/alumnos", () => {
   });
 });
 
-// test route/articulos/:id PUT
+// test route/alumnos/:id PUT
 describe("PUT /api/alumnos/:id", () => {
-  it("Deberia devolver el alumno con el id 1 modificado", async () => {
-    const res = await request(app).put("/api/alumnos/1").send(alumnoModificacion);
+  it("Deberia devolver el alumno con el legajo 79023 modificado", async () => {
+    const res = await request(app).put("/api/alumnos/79023").send(alumnoModificacion);
     expect(res.statusCode).toEqual(200);
   });
 });
 
-// test route/articulos/:id DELETE
+// test route/alumnos/:id DELETE
 describe("DELETE /api/alumnos/:id", () => {
-  it("Deberia devolver el alumno con el id 1 borrado", async () => {
-    const res = await request(app).delete("/api/alumnos/1");
+  it("Deberia devolver el alumno con el legajo 79023 borrado", async () => {
+    const res = await request(app).delete("/api/alumnos/79023");
     expect(res.statusCode).toEqual(200);
     
     // baja logica, no se borra realmente

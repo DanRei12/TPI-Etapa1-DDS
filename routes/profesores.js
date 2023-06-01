@@ -83,13 +83,13 @@ router.put("/api/profesores/:id", async (req, res) => {
         "apellido",
         "descripcion",   
       ],
-      where: { legajoAlumno: req.params.id },
+      where: { legajoProfesor: req.params.id },
     });
     if (!alumno1) {
       res.status(404).json({ message: "Profesor no encontrado" });
       return;
     }
-    profe.Legajo= req.body.legajoAlumno,
+    profe.Legajo= req.body.legajoProfesor,
     profe.Nombre= req.body.nombre,
     profe.Apellido= req.body.apellido,
     profe.Descripcion= req.body.descripcion,
@@ -117,7 +117,7 @@ router.delete("/api/profesores/:id", async (req, res) => {
   if (bajaFisica) {
     // baja fisica
     let filasBorradas = await db.profesores.destroy({
-      where: { legajoAlumno: req.params.id },
+      where: { legajoProfesor: req.params.id },
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);
@@ -128,7 +128,7 @@ router.delete("/api/profesores/:id", async (req, res) => {
 //-- SEGURIDAD ---------------------------
 //------------------------------------
 /* router.get(
-  "/api/jwt/alumnos",
+  "/api/jwt/profesor",
   auth.authenticateJWT,
   async function (req, res, next) {
    
@@ -139,7 +139,7 @@ router.delete("/api/profesores/:id", async (req, res) => {
 
     let items = await db.profesores.findAll({
       attributes: [
-        "legajoAlumno",
+        "legajoProfesor",
         "nombre",
         "apellido",
         "fechaIncripcion",
@@ -150,6 +150,5 @@ router.delete("/api/profesores/:id", async (req, res) => {
     res.json(items);
   }
 );
-
 */
 module.exports = router;

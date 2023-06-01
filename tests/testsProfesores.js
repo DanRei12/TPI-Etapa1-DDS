@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../index");
 const aprofesorAlta = {
+  legajoProfesor: 20242,
   Nombre: "Nombre profesor " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   Apellido: "Apellido profesor " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   FechaInscripcion: new Date().toISOString(),
@@ -8,7 +9,7 @@ const aprofesorAlta = {
   
 };
 const profesorModificacion = {
-    legajoProfesor: 1,
+    legajoProfesor: 20241,
     Nombre: "Nombre profesor " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     Apellido: "Apellido profsesor " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
     FechaInscripcion: new Date().toISOString(),
@@ -16,7 +17,7 @@ const profesorModificacion = {
 };
 
 
-// test route/articulos GET
+// test route/profesores GET
 describe("GET /api/profesores", () => {
   it("Deberia devolver todos los profesores", async () => {
     const res = await request(app).get("/api/profesores");
@@ -34,9 +35,10 @@ describe("GET /api/profesores", () => {
   });
 });
 
+// test route/profesores/:id GET
 describe("GET /api/profesores/:id", () => {
-  it("Deberia devolver el profesores con el id 1", async () => {
-    const res = await request(app).get("/api/ptofesores/1");
+  it("Deberia devolver el profesores con el id 20241", async () => {
+    const res = await request(app).get("/api/profesores/:20241");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
@@ -49,7 +51,7 @@ describe("GET /api/profesores/:id", () => {
   });
 });
 
-// test route/articulos POST
+// test route/profesores POST
 describe("POST /api/profesores", () => {
   it("Deberia devolver el profesor que acabo de crear", async () => {
     const res = await request(app).post("/api/profesores").send(profesorAlta);
@@ -65,18 +67,18 @@ describe("POST /api/profesores", () => {
   });
 });
 
-
-describe("PUT /api/profesor/:id", () => {
-  it("Deberia devolver el profesor con el id 1 modificado", async () => {
-    const res = await request(app).put("/api/profesores/1").send(profesorModificacion);
+// test route/profesores/:id PUT
+describe("PUT /api/profesores/:id", () => {
+  it("Deberia devolver el profesor con el legajo 20241 modificado", async () => {
+    const res = await request(app).put("/api/profesores/20241").send(profesorModificacion);
     expect(res.statusCode).toEqual(200);
   });
 });
 
-// test route/articulos/:id DELETE
-describe("DELETE /api/alumnos/:id", () => {
-  it("Deberia devolver el profesor con el id 1 borrado", async () => {
-    const res = await request(app).delete("/api/profesores/1");
+// test route/profesores/:id DELETE
+describe("DELETE /api/profesores/:id", () => {
+  it("Deberia devolver el profesor con el legajo 20241 borrado", async () => {
+    const res = await request(app).delete("/api/profesores/20241");
     expect(res.statusCode).toEqual(200);
     
     // baja logica, no se borra realmente

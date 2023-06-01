@@ -79,7 +79,7 @@ router.post("/api/alumnos/", async (req, res) => {
 router.put("/api/alumnos/:id", async (req, res) => {
   
   try {
-    let alumno1 = await db.profesores.findOne({
+    let alumno1 = await db.alumnos.findOne({
       attributes: [
         "legajoAlumno",
         "nombre",
@@ -142,7 +142,7 @@ router.delete("/api/alumnos/:id", async (req, res) => {
       return res.status(403).json({ message: "usuario no autorizado!" });
     }
 
-    let items = await db.profesores.findAll({
+    let items = await db.alumno.findAll({
       attributes: [
         "legajoAlumno",
         "nombre",
