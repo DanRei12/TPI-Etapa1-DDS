@@ -148,7 +148,7 @@ const materias = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: Profesor,
+              model: profesores,
               key: 'legajoProfesor',
             },
             validate: {
@@ -162,7 +162,7 @@ const materias = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: Alumno,
+              model: alumnos,
               key: 'legajoAlumno',
             },
             validate: {
@@ -176,7 +176,7 @@ const materias = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: Comision,
+              model: comisiones,
               key: 'nroComision',
             },
             validate: {
@@ -209,7 +209,7 @@ const examenes = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: Materia,
+              model: materias,
               key: 'nroMateria',
             },
             validate: {
@@ -223,7 +223,7 @@ const examenes = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: Alumno,
+              model: alumnos,
               key: 'legajoAlumno',
             },
             validate: {

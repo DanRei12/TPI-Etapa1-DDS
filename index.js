@@ -1,6 +1,7 @@
-require("express-async-errors"); // captura errores en promesas, usar async await
+// require("express-async-errors"); // captura errores en promesas, usar async await
 const express = require("express");
 const path = require("path");
+
 
 /*
 
@@ -20,6 +21,12 @@ if (process.env.WEBSITE_SITE_NAME) {
 
 
 
+
+
+
+
+const materiasRouter = require("./routes/materias")
+app.use(materiasRouter);
 
 //console.log("base", process.env.base);
 //console.log("NODE_ENV", process.env.NODE_ENV);
@@ -121,7 +128,7 @@ app.use(_404Handler);
 
 */
 
-/*
+
 
 //------------------------------------
 //-- INICIO ---------------------------
@@ -137,4 +144,3 @@ if (!module.parent) {   // si no es llamado por otro modulo, es decir, si es el 
 
 module.exports = app; // para testing
 
-*/
