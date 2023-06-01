@@ -76,12 +76,12 @@ router.put("/api/materias/:id", async (req, res) => {
             res.status(404).json({message: "Articulo no encontrado"});
             return;
         }
-        mat.nroMateria = req.body.nroMateria;
-        mat.legajoProfesor = req.body.legajoProfesor;
-        mat.legajoAlumno = req.body.legajoAlumno;
-        mat.nroComision = req.body.nroComision;
-        mat.fechaCreacion = req.body.fechaCreacion;
-        mat.descripcion = req.body.descripcion;
+        mat.NumeroMateria = req.body.nroMateria;
+        mat.LegProfesor = req.body.legajoProfesor;
+        mat.LegAlumno = req.body.legajoAlumno;
+        mat.NumeroComision = req.body.nroComision;
+        mat.FechaCreacion = req.body.fechaCreacion;
+        mat.Descripcion = req.body.descripcion;
 
         await mat.save();
         res.sendStatus(200);
@@ -101,7 +101,7 @@ router.delete("/api/materias/:id", async (req, res) => {
     let bajaFisica = false;
 
     if(bajaFisica) {
-        let borradoFila = await brotliDecompress.materias.destroy ({
+        let borradoFila = await db.materias.destroy ({
             where: {nroMateria: req.params.id},
         });
         if (borradoFila == 1) res.sendStatus(200);
