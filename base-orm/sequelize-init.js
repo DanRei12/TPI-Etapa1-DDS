@@ -12,7 +12,7 @@ const alumnos = sequelize.define(
             allowNull: false,
             primaryKey: true,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El legajo del alumno es requerido",
                 }
@@ -23,7 +23,7 @@ const alumnos = sequelize.define(
             type: DataTypes.STRING(10),
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El nombre del alumno es requerido",
                 }
@@ -33,7 +33,7 @@ const alumnos = sequelize.define(
             type: DataTypes.STRING(10),
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El apellido del alumno es requerido",
                 }
@@ -44,7 +44,7 @@ const alumnos = sequelize.define(
             type: DataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "La fecha de inscripcion del alumno es requerida",
                 }
@@ -66,7 +66,7 @@ const profesores = sequelize.define(
             allowNull: false,
             primaryKey: true,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El legajo del profesor es requerido",
                 }
@@ -76,7 +76,7 @@ const profesores = sequelize.define(
             type: DataTypes.STRING(15),
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El nombre del profesor es requerido",
                 }
@@ -86,7 +86,7 @@ const profesores = sequelize.define(
             type: DataTypes.STRING(15),
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El apellido del profesor es requerido",
                 }
@@ -107,7 +107,7 @@ const comisiones = sequelize.define(
             allowNull: false,
             primaryKey: true,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El numero de comisión es requerido",
                 }
@@ -118,7 +118,7 @@ const comisiones = sequelize.define(
             type: DataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "La fecha de creacion de la comisión es requerida",
                 }
@@ -138,7 +138,7 @@ const materias = sequelize.define(
             allowNull: false,
             primaryKey: true,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El numero de la materia es requerido",
                 }
@@ -152,7 +152,7 @@ const materias = sequelize.define(
               key: 'legajoProfesor',
             },
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El legajo del profesor es requerido",
                 }
@@ -166,7 +166,7 @@ const materias = sequelize.define(
               key: 'legajoAlumno',
             },
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El legajo del alumno es requerido",
                 }
@@ -180,7 +180,7 @@ const materias = sequelize.define(
               key: 'nroComision',
             },
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El numero de comision es requerido",
                 }
@@ -190,7 +190,7 @@ const materias = sequelize.define(
             type: DataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "La fecha de creacion es requerida",
                 }
@@ -213,7 +213,7 @@ const examenes = sequelize.define(
               key: 'nroMateria',
             },
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El numero de la materia es requerido",
                 }
@@ -227,7 +227,7 @@ const examenes = sequelize.define(
               key: 'legajoAlumno',
             },
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "El legajo del alumno es requerido",
                 }
@@ -237,7 +237,7 @@ const examenes = sequelize.define(
             type: DataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: {
+              notEmpty: {
                   args: true,
                   msg: "La fecha del examen es requerido",
                 }
