@@ -1,22 +1,17 @@
 
-require("express-async-errors"); //captura errores en promesas, usar async await
+require("express-async-errors");
 const express = require("express");
 const path = require("path");
 require("./base-orm/sqlite-init"); // crear base si no existe
 
-// crear servidor
+// CREACION SERVIDOR
 const app = express();
 
 
-
 app.use(express.text()); // entiende texto
-app.use(express.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); // para poder leer json en el body
-
-// sirve archivos estaticos
 app.use("/", express.static(path.join(__dirname, "public")));
-
-
 
 
 
@@ -29,31 +24,9 @@ app.use("/", express.static(path.join(__dirname, "public")));
 //app.use(helmet());
 
 
-/*
-var allowCrossDomain = function(req, res, next) {
-   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-   next();
- }
-*/
-
-
-
-
-
 //------------------------------------
 //-- RUTAS ---------------------------
 //------------------------------------
-/*
-app.get("/", (req, res) => {
-  res.send("sitio on line, hola mundo!");
-  res.json({message: 'sitio on line'});
-  res.sendfile("./public/index.html");
-  res.sendfile("./img/imagen.jpg");
-  res.redirect("/index.html"); // no haria falta, valor por defecto usado por express.static
-});
-*/
 
 
 const alumnosRouters = require("./routes/alumnos");
