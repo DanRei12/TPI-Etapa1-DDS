@@ -109,6 +109,25 @@ router.put("/api/materias/:nroMateria", async (req, res) => {
     }
 });
 
+
+// Eliminacion de una materia
+router.delete("/api/materias/:nroMateria", async (req, res) => {
+    /* let examenBorrado = await db.examenes.destroy({
+        where: { nroMateria: req.params.nroMateria}
+    }); */
+    let borradoFila = await db.materias.destroy({
+    where: { nroMateria: req.params.nroMateria },
+  });
+  if (borradoFila == 1) res.sendStatus(200);
+  else res.sendStatus(404);
+}
+);
+
+
+
+
+
+
 /*
 // Eliminacion de una materia
 router.delete("/api/materias/:nroMateria", async (req, res) => {
@@ -127,6 +146,9 @@ router.delete("/api/materias/:nroMateria", async (req, res) => {
   });
 
 */
+
+
+/*
 router.delete("/api/materias/:nroMateria", async function (req, res, next) {
     try {
       const deletedCount = await db.materias.destroy({
@@ -144,10 +166,8 @@ router.delete("/api/materias/:nroMateria", async function (req, res, next) {
       next(error); // Envía el error al siguiente middleware o controlador de errores
     }
   });
+
+  */
     
   
-
-
-
-
 module.exports = router;
