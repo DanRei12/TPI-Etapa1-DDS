@@ -123,9 +123,9 @@ async function CrearBaseSiNoExiste() {
               fechaCreacion datetime NOT NULL,
               descripcion VARCHAR(100),
               PRIMARY KEY(nroMateria),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno),
-              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision),
-              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor)
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
+              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE CASCADE,
+              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor) ON DELETE CASCADE
               );
             `
     );
