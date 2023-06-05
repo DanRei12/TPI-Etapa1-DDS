@@ -52,7 +52,7 @@ describe("POST /api/examenes", () => {
       nombre: "Jeiner",
       apellido: "Sanchez",
       fechaInscripcion: "2021-04-30T14:00:00.000Z",
-      descripcion: "Fachero 3 piernas, como lokitaaaaaaaaa",
+      descripcion: "nose",
     };
     const materia = {
       nroMateria: 200,
