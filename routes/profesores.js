@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
-//const { Op, ValidationError } = require("sequelize");
+const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
 router.get("/api/profesores", async function (req, res, next) {
@@ -54,13 +54,14 @@ router.post("/api/profesores/", async (req, res) => {
   
   try {
     let data = await db.profesores.create({
-      Legajo: req.body.legajoProfesor,
-      Nombre: req.body.nombre,
-      Apellido: req.body.apellido,
-      Descripcion: req.body.descripcion,
+      legajoProfesor: req.body.legajoProfesor,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      descripcion: req.body.descripcion,
       });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
+    console.log(err);
     if (err instanceof ValidationError) {
       // si son errores de validacion, los devolvemos
       let messages = '';

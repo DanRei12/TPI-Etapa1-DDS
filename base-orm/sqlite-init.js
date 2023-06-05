@@ -44,10 +44,10 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `
       CREATE TABLE profesores (
-        legajoProfesor	INT NOT NULL,
-        nombre VARCHAR(15) NOT NULL,
-        apellido VARCHAR(15) NOT NULL,
-        descripcion VARCHAR(50),
+        legajoProfesor INTEGER NOT NULL,
+        nombre TEXT NOT NULL,
+        apellido TEXT NOT NULL,
+        descripcion TEXT,
         PRIMARY KEY (legajoProfesor)
         );
 
@@ -123,9 +123,9 @@ async function CrearBaseSiNoExiste() {
               fechaCreacion datetime NOT NULL,
               descripcion VARCHAR(100),
               PRIMARY KEY(nroMateria),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumno (legajoAlumno),
-              FOREIGN KEY(nroComision) REFERENCES comision (nroComision),
-              FOREIGN KEY(legajoProfesor) REFERENCES profesor (legajoProfesor)
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno),
+              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision),
+              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor)
               );
             `
     );
@@ -161,8 +161,8 @@ async function CrearBaseSiNoExiste() {
               legajoAlumno INT NOT NULL,
               fechaExamen datetime NOT NULL,
               descripcion VARCHAR(100),
-              FOREIGN KEY(nroMateria) REFERENCES materia (nroMateria),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumno (legajoAlumno),
+              FOREIGN KEY(nroMateria) REFERENCES materias (nroMateria),
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno),
               PRIMARY KEY(nroMateria,legajoAlumno)
               );
             `
