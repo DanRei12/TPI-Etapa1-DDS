@@ -2,18 +2,18 @@ const request = require("supertest");
 const app = require("../index");
 const alumnoAlta = {
   LegajoAlumno: 79024,
-  Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(15).substring(2))(),  // Genera un nombre aleatorio
-  Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(15).substring(2))(),  // Genera un nombre aleatorio
-  FechaInscripcion: new Date().toISOString(),
-  Descripcion: "Descripcion alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
+  Nombre: "Ricardinho",  // Genera un nombre aleatorio
+  Apellido: "Ronaldo",  // Genera un nombre aleatorio
+  FechaInscripcion: "2021-07-31T15:00:00.000Z",
+  Descripcion: "Estudiante sobresaliente",  // Genera un nombre aleatorio
   
 };
 const alumnoModificacion = {
-    LegajoAlumno: 79023,
-    Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
-    Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
-    FechaInscripcion: new Date().toISOString(),
-    Descripcion: generateRandomString(150),
+    legajoAlumno: 79023,
+    nombre: "Mari",  
+    apellido: "Closs",  
+    fechaInscripcion: new Date().toISOString(),
+    descripcion: "un muy buen estudiante",
 };
 
 function generateRandomString(length) {
@@ -65,19 +65,42 @@ describe("GET /api/alumnos/:legajoAlumno", () => {
 
 // test route/alumnos POST
 describe("POST /api/alumnos", () => {
-  it("Deberia devolver el alumno que acabo de crear", async () => {
-    const res = await request(app).post("/api/alumnos").send(alumnoAlta);
+  it("Debería agregar un nuevo alumno", async () => {
+    const nuevoAlumno = {
+      legajoAlumno: 12346,
+      nombre: "Juan",
+      apellido: "Pérez",
+      fechaInscripcion: new Date(2022, 1, 1),
+      descripcion: "Estudiante destacado",
+    };
+
+    const res = await request(app)
+      .post("/api/alumnos")
+      .send(nuevoAlumno);
+
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual(
-      expect.objectContaining({
-        LegajoAlumno: expect.any(Number),
-        Nombre: expect.any(String),
-        Apellido: expect.any(String),           
-        FechaInscripcion: expect.any(String),
-        Descripcion: expect.any(String),
-      })
-    );
+    expect(res.body).toHaveProperty("legajoAlumno", nuevoAlumno.legajoAlumno);
+    expect(res.body).toHaveProperty("nombre", nuevoAlumno.nombre);
+    expect(res.body).toHaveProperty("apellido", nuevoAlumno.apellido);
+    expect(res.body).toHaveProperty("fechaInscripcion", nuevoAlumno.fechaInscripcion.toISOString());
+    expect(res.body).toHaveProperty("descripcion", nuevoAlumno.descripcion);
   });
+
+  /* it("Debería devolver un error de validación si se omiten campos obligatorios", async () => {
+    const alumnoSinCamposObligatorios = {};
+
+    const res = await request(app)
+      .post("/api/alumnos")
+      .send(alumnoSinCamposObligatorios);
+
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toHaveProperty("message");
+    expect(res.body.message).toContain("legajoAlumno");
+    expect(res.body.message).toContain("nombre");
+    expect(res.body.message).toContain("apellido");
+    expect(res.body.message).toContain("fechaInscripcion");
+    expect(res.body.message).toContain("descripcion");
+  }); */
 });
 
 // test route/alumnos/:id PUT
@@ -90,8 +113,8 @@ describe("PUT /api/alumnos/:legajoAlumno", () => {
 
 // test route/alumnos/:id DELETE
 describe("DELETE /api/alumnos/:legajoAlumno", () => {
-  it("Deberia devolver el alumno con el legajo 79023 borrado", async () => {
-    const res = await request(app).delete("/api/alumnos/79023");
+  it("Deberia devolver el alumno con el legajo 90223 borrado", async () => {
+    const res = await request(app).delete("/api/alumnos/90223");
     expect(res.statusCode).toEqual(200);
     
     // baja logica, no se borra realmente

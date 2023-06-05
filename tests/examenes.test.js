@@ -84,7 +84,6 @@ describe("POST /api/examenes", () => {
 
     const res = await request(app).post("/api/examenes").send(examen);
 
-    console.log(expect.objectContaining(examen));
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(expect.objectContaining(examen));
   });

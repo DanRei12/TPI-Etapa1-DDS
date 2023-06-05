@@ -64,6 +64,7 @@ router.post("/api/alumnos/", async (req, res) => {
       });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
+    console.log(err);
     if (err instanceof ValidationError) {
       // si son errores de validacion, los devolvemos
       let messages = '';
