@@ -45,7 +45,7 @@ router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
         "nombre",
         "apellido",
         "fechaInscripcion",
-        "descripcion",            
+        "descripcion"            
     ],
     where: { legajoAlumno: req.params.legajoAlumno},
   });
@@ -117,17 +117,17 @@ router.put("/api/alumnos/:legajoAlumno", async (req, res) => {
 
 router.delete("/api/alumnos/:legajoAlumno", async (req, res) => {
   
-  let bajaFisica = false;
+/*   let bajaFisica = false;
 
   if (bajaFisica) {
-    // baja fisica
+    // baja fisica */
     let filasBorradas = await db.alumnos.destroy({
       where: { legajoAlumno: req.params.legajoAlumno},
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);
   }
-});
+);
 
 //------------------------------------
 //-- SEGURIDAD ---------------------------

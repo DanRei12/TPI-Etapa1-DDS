@@ -2,10 +2,10 @@ const request = require("supertest");
 const app = require("../index");
 const alumnoAlta = {
   LegajoAlumno: 79024,
-  Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
-  Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
+  Nombre: "Nombre alumno " + (( ) => (Math.random() + 1).toString(15).substring(2))(),  // Genera un nombre aleatorio
+  Apellido: "Apellido alumno " + (( ) => (Math.random() + 1).toString(15).substring(2))(),  // Genera un nombre aleatorio
   FechaInscripcion: new Date().toISOString(),
-  Descripcion: "Descripcion alumno " + (( ) => (Math.random() + 1).toString(150).substring(2))(),  // Genera un nombre aleatorio
+  Descripcion: "Descripcion alumno " + (( ) => (Math.random() + 1).toString(36).substring(2))(),  // Genera un nombre aleatorio
   
 };
 const alumnoModificacion = {
@@ -33,17 +33,16 @@ describe("GET /api/alumnos", () => {
   it("Deberia devolver todos los alumnos", async () => {
     const res = await request(app).get("/api/alumnos");
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-            legajoAlumno: expect.any(Number),
-            Nombre: expect.any(String),
-            Apellido: expect.any(String),           
-            FechaInscripcion: expect.any(String),
-            Descripcion: expect.any(String),
-        }),
-      ])
-    );
+    expect(res.body.Alumnos).toBeInstanceOf(Array);
+
+    // Verificar la estructura de cada examen en la respuesta
+    res.body.Alumnos.forEach((alumno) => {
+      expect(alumno).toHaveProperty("apellido");
+      expect(alumno).toHaveProperty("descripcion");
+      expect(alumno).toHaveProperty("fechaInscripcion");
+      expect(alumno).toHaveProperty("legajoAlumno");
+      expect(alumno).toHaveProperty("nombre");
+    });
   });
 });
 
@@ -54,11 +53,11 @@ describe("GET /api/alumnos/:legajoAlumno", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual(
       expect.objectContaining({
-        LegajoAlumno: expect.any(Number),
-        Nombre: expect.any(String),
-        Apellido: expect.any(String),           
-        FechaInscripcion: expect.any(String),
-        Descripcion: expect.any(String),
+        legajoAlumno: expect.any(Number),
+        nombre: expect.any(String),
+        apellido: expect.any(String),           
+        fechaInscripcion: expect.any(String),
+        descripcion: expect.any(String),
       })
     );
   });

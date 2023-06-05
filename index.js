@@ -41,6 +41,9 @@ app.use(materiasRouters);
 const examenesRouters = require("./routes/examenes");
 app.use(examenesRouters);
 
+const comisionesRouters = require("./routes/comisiones");
+app.use(comisionesRouters);
+
 //const comisionesRouters = require("./routes/comisiones");
 //app.use(comisionesRouters);
 

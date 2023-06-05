@@ -55,7 +55,7 @@ const alumnos = sequelize.define(
             type: DataTypes.STRING(50),
           },
 
-    }
+    },{timestamps: false,}
 );
 
 const profesores = sequelize.define(
@@ -96,6 +96,8 @@ const profesores = sequelize.define(
             type: DataTypes.STRING(50),
           },
 
+    }, {
+      timestamps: false,
     }
 );
 
@@ -127,7 +129,7 @@ const comisiones = sequelize.define(
           descripcion: {
             type: DataTypes.STRING(50),
           },
-    }
+    }, {timestamps: false,}
 );
 
 const materias = sequelize.define(
@@ -199,7 +201,7 @@ const materias = sequelize.define(
           descripcion: {
             type: DataTypes.STRING(100),
           },
-    }
+    },{timestamps: false,}
 );
 
 const examenes = sequelize.define(
@@ -208,6 +210,7 @@ const examenes = sequelize.define(
         nroMateria: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            primaryKey: true,
             references: {
               model: materias,
               key: 'nroMateria',
@@ -246,7 +249,9 @@ const examenes = sequelize.define(
           descripcion: {
             type: DataTypes.STRING(100),
           },
-          primaryKey: true,
+    },
+    {
+      timestamps: false,
     }
 );
 

@@ -4,15 +4,14 @@ const db = require("aa-sqlite");
 async function CrearBaseSiNoExiste() {
   // abrir base, si no existe el archivo/base lo crea
   await db.open("./.data/BD-Tpi-DDS.db");
-  
-  
+  await db.run("PRAGMA foreign_keys = OFF");
 
   let existe = false;
   let res = null;
 
-  
-  sqlAlumnos= "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'alumnos'",
-  res = await db.get(sqlAlumnos, []);
+  (sqlAlumnos =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'alumnos'"),
+    (res = await db.get(sqlAlumnos, []));
   if (res.contar > 0) existe = true;
   if (!existe) {
     await db.run(
@@ -32,12 +31,12 @@ async function CrearBaseSiNoExiste() {
       (91456, 'Valeria', 'Molinas', '2021-11-05', 'Estudiante promedio'),
       (89412, 'Joaquín', 'Pelosi', '2020-11-19', 'Estudiante destacado');  
       `
-      
     );
   }
 
   existe = false;
-  sqlProfesores = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'profesores'";
+  sqlProfesores =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'profesores'";
   res = await db.get(sqlProfesores, []);
   if (res.contar > 0) existe = true;
   if (!existe) {
@@ -55,7 +54,7 @@ async function CrearBaseSiNoExiste() {
     );
     console.log("tabla profesores creada!");
     await db.run(
-        `INSERT INTO profesores (legajoProfesor, nombre, apellido, descripcion)
+      `INSERT INTO profesores (legajoProfesor, nombre, apellido, descripcion)
         VALUES (10231, 'Juan', 'González', 'Profesor de Álgebra'),
         (11235, 'María', 'López', 'Profesora de Desarrollo de Software'),
         (12355, 'Pedro', 'Martínez', 'Profesor de Ciber Seguridad'),
@@ -68,17 +67,17 @@ async function CrearBaseSiNoExiste() {
         (30123, 'Mariana', 'Figal', 'Profesor de Inglés 2');
         
         `
-      );
+    );
   }
-      
-      
-      existe = false;
-      sqlComisiones = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'comisiones'";
-      res = await db.get(sqlComisiones, []);
-      if (res.contar > 0) existe = true;
-      if (!existe) {
-        await db.run(
-          `
+
+  existe = false;
+  sqlComisiones =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'comisiones'";
+  res = await db.get(sqlComisiones, []);
+  if (res.contar > 0) existe = true;
+  if (!existe) {
+    await db.run(
+      `
           CREATE TABLE comisiones (
             nroComision INT NOT NULL,
             fechaCreacion DATETIME NOT NULL,
@@ -87,9 +86,9 @@ async function CrearBaseSiNoExiste() {
             );
           `
     );
-      console.log("tabla comisiones creada!");
-      await db.run(
-        `
+    console.log("tabla comisiones creada!");
+    await db.run(
+      `
         INSERT INTO comisiones (nroComision, fechaCreacion, descripcion)
         VALUES (551, '2005-02-02 09:00:00', 'Comisión A'),
         (234, '2009-01-23 10:25:00', 'Comisión K'),
@@ -101,37 +100,36 @@ async function CrearBaseSiNoExiste() {
         (568, '2020-07-19 11:30:00', 'Comisión F'),
         (793, '2021-02-21 17:70:00', 'Comisión E'),
         (357, '2023-03-01 16:50:00', 'Comisión C');
-        ` 
-        
-        );
+        `
+    );
   }
-        
-        
-        
-        existe = false;
-        sqlMaterias = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'materias'";
-        res = await db.get(sqlMaterias, []);
-        if (res.contar > 0) existe = true;
-        if (!existe) {
-          await db.run(
-            `
+
+  existe = false;
+  sqlMaterias =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'materias'";
+  res = await db.get(sqlMaterias, []);
+  if (res.contar > 0) existe = true;
+  if (!existe) {
+    await db.run(
+      
+      `
             CREATE TABLE materias (
-              nroMateria INT NOT NULL,
-              legajoProfesor INT NOT NULL,
-              legajoAlumno INT NOT NULL,
-              nroComision INT NOT NULL,
-              fechaCreacion datetime NOT NULL,
+              nroMateria INT,
+              legajoProfesor INT,
+              legajoAlumno INT,
+              nroComision INT,
+              fechaCreacion datetime,
               descripcion VARCHAR(100),
-              PRIMARY KEY(nroMateria),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumno (legajoAlumno),
-              FOREIGN KEY(nroComision) REFERENCES comision (nroComision),
-              FOREIGN KEY(legajoProfesor) REFERENCES profesor (legajoProfesor)
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
+              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE CASCADE,
+              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor) ON DELETE CASCADE,
+              PRIMARY KEY(nroMateria)
               );
             `
     );
-        console.log("tabla materias creada!");
-        await db.run(
-          `
+    console.log("tabla materias creada!");
+    await db.run(
+      `
           INSERT INTO materias (nroMateria, legajoProfesor, legajoAlumno, nroComision, fechaCreacion, descripcion)
           VALUES (24, 10231, 75094, 551, '2005-12-05 09:00:00', 'Algebra'),
           (20, 11235, 75231, 234, '2010-05-20 19:00:00', 'Desarrollo de Software'),
@@ -145,31 +143,31 @@ async function CrearBaseSiNoExiste() {
           (35, 30123, 90223, 357, '2013-06-10 17:42:00', 'Inglés 2');
 
           `
-          );
+    );
   }
-          
-          
-        existe = false;
-        sqlExamenes = "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'examenes'";
-        res = await db.get(sqlExamenes, []);
-        if (res.contar > 0) existe = true;
-        if (!existe) {
-          await db.run(
-            `
+
+  existe = false;
+  sqlExamenes =
+    "SELECT count(*) as contar FROM sqlite_schema WHERE type = 'table' and name= 'examenes'";
+  res = await db.get(sqlExamenes, []);
+  if (res.contar > 0) existe = true;
+  if (!existe) {
+    await db.run(
+      `
             CREATE TABLE examenes (
-              nroMateria INT NOT NULL,
-              legajoAlumno INT NOT NULL,
-              fechaExamen datetime NOT NULL,
+              nroMateria INT,
+              legajoAlumno INT,
+              fechaExamen datetime,
               descripcion VARCHAR(100),
-              FOREIGN KEY(nroMateria) REFERENCES materia (nroMateria),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumno (legajoAlumno),
-              PRIMARY KEY(nroMateria,legajoAlumno)
+              FOREIGN KEY(nroMateria) REFERENCES materias (nroMateria) ON DELETE CASCADE,
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
+              PRIMARY KEY(nroMateria)
               );
             `
-          );
-          console.log("tabla examenes creada!");
-          await db.run(
-            `
+    );
+    console.log("tabla examenes creada!");
+    await db.run(
+      `
            INSERT INTO examenes (nroMateria, legajoAlumno, fechaExamen, descripcion)
             VALUES (24, 75094, '2023-05-20 10:00:00', 'Examen de Algebra'),
             (20, 75231, '2023-06-13 17:45:00', 'Examen de Desarrollo de Software'),
@@ -183,15 +181,12 @@ async function CrearBaseSiNoExiste() {
             (35, 90223, '2023-05-31 11:00:00', 'Examen de Inglés 2');
             
             `
-            );
-    }
-    
+    );
+  }
+  await db.run("PRAGMA foreign_keys = ON");
   db.close();
-
 }
-
 
 CrearBaseSiNoExiste();
 
-module.exports =  CrearBaseSiNoExiste;
-
+module.exports = CrearBaseSiNoExiste;
