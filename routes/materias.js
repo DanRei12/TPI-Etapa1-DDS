@@ -1,3 +1,16 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
@@ -29,7 +42,7 @@ router.get("/api/materias/:nroMateria", async function(req, res, next) {
             "fechaCreacion",
             "descripcion",
         ],
-        where: {nroMateria: req.params.id},
+        where: {nroMateria: req.params.nroMateria},
     });
     res.json(mat);
 });
@@ -47,6 +60,7 @@ router.post("/api/materias/", async (req, res) =>{
         });
         res.status(200).json(data.dataValues)
     } catch (e){
+        console.log(e)
         if (e instanceof ValidationError){
             let messages = '';
             e.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
@@ -69,7 +83,7 @@ router.put("/api/materias/:nroMateria", async (req, res) => {
                 "fechaCreacion",
                 "descripcion",
             ],  
-            where: {nroMateria: req.params.id},
+            where: {nroMateria: req.params.nroMateria},
         });
         if (!mat) {
             res.status(404).json({message: "Articulo no encontrado"});
@@ -95,17 +109,45 @@ router.put("/api/materias/:nroMateria", async (req, res) => {
     }
 });
 
+/*
 // Eliminacion de una materia
 router.delete("/api/materias/:nroMateria", async (req, res) => {
+  
     let bajaFisica = false;
 
-    if(bajaFisica) {
-        let borradoFila = await db.materias.destroy ({
-            where: {nroMateria: req.params.id},
-        });
-        if (borradoFila == 1) res.sendStatus(200);
-        else res.sendStatus(404);
-    } 
-});
+    
+    if (bajaFisica) {
+      // baja fisica
+      let filasBorradas = await db.materias.destroy({
+        where: { nroMateria: req.params.nroMateria},
+      });
+      if (filasBorradas == 1) res.sendStatus(200);
+      else res.sendStatus(404);
+    }
+  });
+
+*/
+router.delete("/api/materias/:nroMateria", async function (req, res, next) {
+    try {
+      const deletedCount = await db.materias.destroy({
+        where: { nroMateria: req.params.nroMateria },
+        cascade: true, // Habilita la eliminación en cascada
+      });
+  
+      if (deletedCount === 1) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    } catch (error) {
+      console.log(error);
+      next(error); // Envía el error al siguiente middleware o controlador de errores
+    }
+  });
+    
+  
+
+
+
 
 module.exports = router;
