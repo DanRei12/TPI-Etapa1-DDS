@@ -45,7 +45,7 @@ router.get("/api/profesores/:legajoProfesor", async function (req, res, next) {
         "apellido",
         "descripcion",            
     ],
-    where: { legajoProfesor: req.params.id },
+    where: { legajoProfesor: req.params.legajoProfesor },
   });
   res.json(profe);
 });
@@ -84,7 +84,7 @@ router.put("/api/profesores/:legajoProfesor", async (req, res) => {
         "apellido",
         "descripcion",   
       ],
-      where: { legajoProfesor: req.params.id },
+      where: { legajoProfesor: req.params.legajoProfesor },
     });
     if (!alumno1) {
       res.status(404).json({ message: "Profesor no encontrado" });
