@@ -5,11 +5,12 @@ const {Op, ValidationError} = require("sequelize");
 
 //get all
 router.get("/api/comisiones", async function (req, res, next) {
-    let comision = await db.comisiones.findAndCountAll({
+    let comision = await db.comisiones.findAll({
         attributes: ["nroComision", "fechaCreacion", "descripcion"],
     });
     res.json(comision);
 });
+
 
 //get one by id
 router.get("/api/comisiones/:id", async function (req, res, next) {
