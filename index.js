@@ -1,4 +1,4 @@
-
+//Se especifican las librerias a usar
 require("express-async-errors");
 const express = require("express");
 const path = require("path");
@@ -28,7 +28,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 //-- RUTAS ---------------------------
 //------------------------------------
 
-
+//Se importan las routes correspondientes para cada tabla
 const alumnosRouters = require("./routes/alumnos");
 app.use(alumnosRouters);
 
@@ -40,6 +40,9 @@ app.use(materiasRouters);
 
 const examenesRouters = require("./routes/examenes");
 app.use(examenesRouters);
+
+const comisionesRouters = require("./routes/comisiones");
+app.use(comisionesRouters);
 
 //const comisionesRouters = require("./routes/comisiones");
 //app.use(comisionesRouters);

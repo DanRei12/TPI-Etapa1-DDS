@@ -4,20 +4,14 @@ const router = express.Router();
 const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
+//Bloque de la solicitud get, debe devolver todos los alumnos en la tabla.
 router.get("/api/alumnos", async function (req, res, next) {
-
-  
     let where = {};
     if (req.query.nombre != undefined && req.query.nombre !== "") {
       where.Nombre = {
         [Op.like]: "%" + req.query.nombre + "%",
       };
     }
-   /* if (req.query.fechaIncripcion != undefined && req.query.fechaIncripcion !== "") {
-      // true o false en el modelo, en base de datos es 1 o 0
-      // convierto el string a booleano
-      where.fechaIncripcion = (req.query.fechaIncripcion === 'true'); 
-    } */
     const Pagina = req.query.Pagina ?? 1;
     const TamañoPagina = 10;
     const { count, rows } = await db.alumnos.findAndCountAll({
@@ -38,6 +32,7 @@ router.get("/api/alumnos", async function (req, res, next) {
     
   });
 
+//Bloque de la solicitud get por id, debe devolver el alumno especifico mediante el legajo enviado por parametro
 router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
    let alumno1 = await db.alumnos.findOne({
     attributes: [
@@ -45,15 +40,15 @@ router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
         "nombre",
         "apellido",
         "fechaInscripcion",
-        "descripcion",            
+        "descripcion"            
     ],
     where: { legajoAlumno: req.params.legajoAlumno},
   });
   res.json(alumno1);
 });
 
+//Bloque de la solicitud post, crea un nuevo registro alumno con los campos del body
 router.post("/api/alumnos/", async (req, res) => {
-  
   try {
     let data = await db.alumnos.create({
       legajoAlumno: req.body.legajoAlumno,
@@ -64,6 +59,7 @@ router.post("/api/alumnos/", async (req, res) => {
       });
     res.status(200).json(data.dataValues); // devolvemos el registro agregado!
   } catch (err) {
+    console.log(err);
     if (err instanceof ValidationError) {
       // si son errores de validacion, los devolvemos
       let messages = '';
@@ -76,8 +72,8 @@ router.post("/api/alumnos/", async (req, res) => {
   }
 });
 
+//Bloque de la solicitud put, modifica datos ingresados por body mediante el legajo dado por parametro
 router.put("/api/alumnos/:legajoAlumno", async (req, res) => {
-  
   try {
     let alumno1 = await db.alumnos.findOne({
       attributes: [
@@ -115,19 +111,15 @@ router.put("/api/alumnos/:legajoAlumno", async (req, res) => {
   }
 });
 
+//Se realiza la baja fisica de un registro Alumno especifico.
 router.delete("/api/alumnos/:legajoAlumno", async (req, res) => {
-  
-  let bajaFisica = false;
-
-  if (bajaFisica) {
-    // baja fisica
     let filasBorradas = await db.alumnos.destroy({
       where: { legajoAlumno: req.params.legajoAlumno},
     });
     if (filasBorradas == 1) res.sendStatus(200);
     else res.sendStatus(404);
   }
-});
+);
 
 //------------------------------------
 //-- SEGURIDAD ---------------------------

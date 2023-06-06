@@ -62,19 +62,44 @@ describe("GET /api/materias/:id", function () {
  
 // Tests para agregar una materia
 describe("POST /api/materias", () => {
-    it("Deberia devolver la materia que se acaba de crear", async () => {
-        const res = await request(app).post("/api/materias/").send(nuevaMateria);
-        expect(res.statusCode).toEqual(200);
-        expect(res.body).toEqual(
-            expect.objectContaining({
-                nroMateria: expect.any(Number),
-                legajoProfesor: expect.any(Number),
-                legajoAlumno: expect.any(Number),
-                nroComision: expect.any(Number),
-                fechaCreacion: expect.any(DATE),
-                descripcion: expect.any(String),
-            })
-        );
+    it("Debería agregar una nueva materia", async () => {
+      const alumno = {
+        legajoAlumno: 81211,
+        nombre: "Kylian",
+        apellido: "Mbappé",
+        fechaInscripcion: "2021-04-30T14:00:00.000Z",
+        descripcion: "Alumno Excelente",
+      };
+      const materia = {
+        nroMateria: 201,
+        legajoProfesor: 13335,
+        legajoAlumno: 81211,
+        nroComision: 239,
+        fechaCreacion: "2009-11-11T15:00:00.000Z",
+        descripcion: "Hidrologia",
+      };
+      const profesor = {
+        legajoProfesor: 13335,
+        nombre: "Silvio",
+        apellido: "Serra",
+        descripcion: "Mejor profe de la universidad",
+      };
+      const comision = {
+        nroComision: 239,
+        fechaCreacion: "2002-07-31T14:00:00.000Z",
+        descripcion: "Comision Z",
+      };
+  
+      const res1 = await request(app).post("/api/comisiones").send(comision);
+  
+      const res2 = await request(app).post("/api/alumnos").send(alumno);
+  
+      const res3 = await request(app).post("/api/profesores").send(profesor);
+  
+      const res = await request(app).post("/api/materias").send(materia);
+    
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toEqual(expect.objectContaining(materia));
     });
 });
 
@@ -87,9 +112,9 @@ describe("PUT /api/materias/:id", () => {
 });
 
 // Tests para eliminar una materia
-describe("DELETE /api/materias/10", () => {
-    it("Debería devolver la materia con el número 24 borrado", async () => {
-        const res = await request(app).delete("/api/materias/24");
+describe("DELETE /api/materias/9", () => {
+    it("Debería devolver la materia con el número 9 borrado", async () => {
+        const res = await request(app).delete("/api/materias/9");
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual({});
     });
