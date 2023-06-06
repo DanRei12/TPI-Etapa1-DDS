@@ -99,9 +99,6 @@ router.put("/api/materias/:nroMateria", async (req, res) => {
 
 // Eliminacion de una materia
 router.delete("/api/materias/:nroMateria", async (req, res) => {
-    /* let examenBorrado = await db.examenes.destroy({
-        where: { nroMateria: req.params.nroMateria}
-    }); */
     let borradoFila = await db.materias.destroy({
     where: { nroMateria: req.params.nroMateria },
   });

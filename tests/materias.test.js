@@ -68,7 +68,7 @@ describe("POST /api/materias", () => {
         nombre: "Kylian",
         apellido: "Mbappé",
         fechaInscripcion: "2021-04-30T14:00:00.000Z",
-        descripcion: "Alumno jugador",
+        descripcion: "Alumno Excelente",
       };
       const materia = {
         nroMateria: 201,

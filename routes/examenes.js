@@ -22,29 +22,6 @@ router.get("/api/examenes/:id", async function (req, res, next) {
 });
 
 //Se realiza la solicitud post para el ingreso de un nuevo registro Examen en la base de datos.
-/*router.post("/api/examenes/", async (req, res) => {
-    try {
-      let data = await db.examenes.create({
-        nroMateria: req.body.nroMateria,
-        legajoAlumno: req.body.legajoAlumno,
-        fechaExamen: req.body.fechaExamen,
-        descripcion: req.body.descripcion,
-      });
-      res.status(200).json(data.dataValues); // Se devuelven datos del registro agregado
-    } catch (err) {
-      if (err instanceof ValidationError) {
-        // Se devuelven errores de validación.
-        let messages = '';
-        err.errors.forEach((x) => messages += (x.path ?? 'campo') + ": " + x.message + '\n');
-        res.status(400).json({message : messages});
-      } else {
-        // En caso de errores desconocidos, los maneja el middleware de errores.
-        throw err;
-      }
-    }
-});
-*/
-
 router.post("/api/examenes/", async (req, res) => {
   try {
     const { nroMateria, legajoAlumno, fechaExamen, descripcion } = req.body;

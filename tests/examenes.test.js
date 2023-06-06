@@ -5,7 +5,7 @@ const examenModificacion = {
   nroMateria: 15,
   legajoAlumno: 80203,
   fechaExamen: "2023-07-31T14:00:00.000Z",
-  descripcion: "Final de Qatar",
+  descripcion: "Exámen de PAV",
 };
 
 describe("GET /api/examenes", () => {
@@ -52,7 +52,7 @@ describe("POST /api/examenes", () => {
       nombre: "Jeiner",
       apellido: "Sanchez",
       fechaInscripcion: "2021-04-30T14:00:00.000Z",
-      descripcion: "nose",
+      descripcion: "Buen estudiante",
     };
     const materia = {
       nroMateria: 200,
@@ -66,12 +66,12 @@ describe("POST /api/examenes", () => {
       legajoProfesor: 11235,
       nombre: "Ricardo",
       apellido: "Rabozzi",
-      descripcion: "Descripcion profesor ",
+      descripcion: "Buen profe",
     };
     const comision = {
       nroComision: 234,
       fechaCreacion: "2002-07-31T14:00:00.000Z",
-      descripcion: "una descr",
+      descripcion: "Comision U",
     };
 
     const res1 = await request(app).post("/api/comisiones").send(comision);

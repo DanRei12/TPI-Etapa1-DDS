@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const {Op, ValidationError} = require("sequelize");
 
-//get all
+//Bloque de la solicitud get, debe devolver todas las comisiones en la tabla.
 router.get("/api/comisiones", async function (req, res, next) {
     let comision = await db.comisiones.findAll({
         attributes: ["nroComision", "fechaCreacion", "descripcion"],
@@ -20,7 +20,7 @@ router.get("/api/comisiones/:id", async function (req, res, next) {
     res.json(comision);
 });
 
-//post
+//post, añade un registro comisión
 router.post("/api/comisiones/", async (req, res) => {
     try {
         const {nroComision, fechaCreacion, descripcion} = req.body;
@@ -40,7 +40,7 @@ router.post("/api/comisiones/", async (req, res) => {
     }
 });
 
-//PUT
+//PUT, modifica datos de un registro en especifico
 router.put("/api/comisiones/:id", async (req, res) => {
     try {
         let comision = await db.comisiones.findOne({
@@ -68,7 +68,8 @@ router.put("/api/comisiones/:id", async (req, res) => {
         }
     }
 });
-//delete
+
+//delete, baja fisica de un registro Comision
 router.delete("/api/comisiones/:id", async (req, res) => {
     try {
         let rowsDelete = await db.comisiones.destroy({

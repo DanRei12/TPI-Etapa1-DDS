@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../index");
 const alumnoAlta = {
   LegajoAlumno: 79024,
-  Nombre: "Ricardinho",  // Genera un nombre aleatorio
+  Nombre: "Mirko",  // Genera un nombre aleatorio
   Apellido: "Ronaldo",  // Genera un nombre aleatorio
   FechaInscripcion: "2021-07-31T15:00:00.000Z",
   Descripcion: "Estudiante sobresaliente",  // Genera un nombre aleatorio
@@ -13,7 +13,7 @@ const alumnoModificacion = {
     nombre: "Mari",  
     apellido: "Closs",  
     fechaInscripcion: new Date().toISOString(),
-    descripcion: "un muy buen estudiante",
+    descripcion: "Un muy buen estudiante",
 };
 
 function generateRandomString(length) {
