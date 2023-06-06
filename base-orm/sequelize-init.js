@@ -1,5 +1,5 @@
 // configurar ORM sequelize
-const { Sequelize, DataTypes, ValidationError} = require("sequelize");
+const { Sequelize, DataTypes, ValidationError } = require("sequelize");
 //const sequelize = new Sequelize("sqlite:" + process.env.base );
 const sequelize = new Sequelize("sqlite:" + "./.data/BD-Tpi-DDS.db");
 
@@ -258,11 +258,11 @@ const examenes = sequelize.define(
 
 
 module.exports = {
-    sequelize,
-    alumnos,
-    profesores,
-    comisiones,
-    materias,
-    examenes,
-  };
-  
+  sequelize,
+  alumnos,
+  profesores,
+  comisiones,
+  materias,
+  examenes,
+};
+

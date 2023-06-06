@@ -57,6 +57,7 @@ router.post("/api/profesores/", async (req, res) => {
     });
     res.status(200).json(data.dataValues); // Devuelve los datos del registro agregado
   } catch (err) {
+    console.log(err);
     if (err instanceof ValidationError) {
       // Devuelve errores de validación
       let messages = "";

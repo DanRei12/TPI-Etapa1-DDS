@@ -1,3 +1,16 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
@@ -106,4 +119,29 @@ router.delete("/api/materias/:nroMateria", async (req, res) => {
   else res.sendStatus(404);
 });
 
+*/
+
+
+/*
+router.delete("/api/materias/:nroMateria", async function (req, res, next) {
+    try {
+      const deletedCount = await db.materias.destroy({
+        where: { nroMateria: req.params.nroMateria },
+        cascade: true, // Habilita la eliminación en cascada
+      });
+  
+      if (deletedCount === 1) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    } catch (error) {
+      console.log(error);
+      next(error); // Envía el error al siguiente middleware o controlador de errores
+    }
+  });
+
+  */
+    
+  
 module.exports = router;

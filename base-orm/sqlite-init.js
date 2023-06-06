@@ -43,10 +43,10 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `
       CREATE TABLE profesores (
-        legajoProfesor	INT NOT NULL,
-        nombre VARCHAR(15) NOT NULL,
-        apellido VARCHAR(15) NOT NULL,
-        descripcion VARCHAR(50),
+        legajoProfesor INTEGER NOT NULL,
+        nombre TEXT NOT NULL,
+        apellido TEXT NOT NULL,
+        descripcion TEXT,
         PRIMARY KEY (legajoProfesor)
         );
 
