@@ -55,7 +55,21 @@ const alumnos = sequelize.define(
             type: DataTypes.STRING(50),
           },
 
-    },{timestamps: false,}
+    },{timestamps: false,},
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (socios, options) {
+          if (typeof socios.nombre === "string") {
+            socios.nombre = socios.nombre.toUpperCase().trim();
+          }
+          if (typeof socios.apellido === "string") {
+            socios.apellido = socios.apellido.toUpperCase().trim();
+          }
+        },
+      },
+    }
+  
 );
 
 const profesores = sequelize.define(

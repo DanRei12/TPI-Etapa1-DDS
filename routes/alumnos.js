@@ -4,6 +4,37 @@ const router = express.Router();
 const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
+
+
+router.get("/api/alumnos", async function (req, res) {
+  // consulta de articulos con filtros y paginacion
+
+  let where = {};
+  if (req.query.nombre != undefined && req.query.nombre !== "") {
+    where.nombre = {
+      [Op.like]: "%" + req.query.nombre + "%",
+    };
+  }
+  
+  let items = await db.alumnos.findAndCountAll({
+    attributes: [
+      "legajoAlumno",
+      "nombre",
+      "apellido",
+      "fechaInscripcion",
+      "descripcion",
+    ],
+    order: [["nombre", "ASC"]],
+    where,
+  });
+
+  res.json(items.rows);
+});
+
+
+
+
+/*
 //Bloque de la solicitud get, debe devolver todos los alumnos en la tabla.
 router.get("/api/alumnos", async function (req, res, next) {
     let where = {};
@@ -46,6 +77,9 @@ router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
   });
   res.json(alumno1);
 });
+
+*/
+
 
 //Bloque de la solicitud post, crea un nuevo registro alumno con los campos del body
 router.post("/api/alumnos/", async (req, res) => {
