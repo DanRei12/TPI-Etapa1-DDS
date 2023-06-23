@@ -2,6 +2,7 @@
 require("express-async-errors");
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 require("./base-orm/sqlite-init"); // crear base si no existe
 
 // CREACION SERVIDOR
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.text()); // entiende texto
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); // para poder leer json en el body
+app.use(cors())
 app.use("/", express.static(path.join(__dirname, "public")));
 
 
@@ -75,4 +77,3 @@ if (!module.parent) {   // si no es llamado por otro modulo, es decir, si es el 
 }
 
 module.exports = app; // para testing
-
