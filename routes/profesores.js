@@ -4,6 +4,7 @@ const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
+/*
 //Bloque de la solicitud get, debe devolver todos los profesores en la tabla.
 router.get("/api/profesores", async function (req, res, next) {  
     let where = {};
@@ -30,6 +31,32 @@ router.get("/api/profesores", async function (req, res, next) {
     return res.json({ Profesores: rows, RegistrosTotal: count });
     
   });
+
+  */
+  router.get("/api/profesores", async function (req, res) {
+    // consulta de profesores con filtros y paginacion
+  
+    let where = {};
+    if (req.query.nombre != undefined && req.query.nombre !== "") {
+      where.nombre = {
+        [Op.like]: "%" + req.query.nombre + "%",
+      };
+    }
+    
+    let prof = await db.profesores.findAndCountAll({
+      attributes: [
+        "legajoProfesor",
+        "nombre",
+        "apellido",
+        "descripcion", 
+      ],
+      order: [["nombre", "ASC"]],
+      where,
+    });
+  
+    res.json(prof.rows);
+  });
+  
 
 //Bloque de la solicitud get por id, debe devolver el profesor especifico mediante el legajo enviado por parametro
   router.get("/api/profesores/:legajoProfesor", async function (req, res, next) {
