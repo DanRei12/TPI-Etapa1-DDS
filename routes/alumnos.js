@@ -7,7 +7,7 @@ const { Op, ValidationError } = require("sequelize");
 
 
 router.get("/api/alumnos", async function (req, res) {
-  // consulta de articulos con filtros y paginacion
+  // consulta de alumnos con filtros y paginacion
 
   let where = {};
   if (req.query.nombre != undefined && req.query.nombre !== "") {
@@ -63,6 +63,8 @@ router.get("/api/alumnos", async function (req, res, next) {
     
   });
 
+  */
+
 //Bloque de la solicitud get por id, debe devolver el alumno especifico mediante el legajo enviado por parametro
 router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
    let alumno1 = await db.alumnos.findOne({
@@ -78,7 +80,7 @@ router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
   res.json(alumno1);
 });
 
-*/
+
 
 
 //Bloque de la solicitud post, crea un nuevo registro alumno con los campos del body
