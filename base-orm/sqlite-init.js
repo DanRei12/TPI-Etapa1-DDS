@@ -80,7 +80,7 @@ async function CrearBaseSiNoExiste() {
       `
           CREATE TABLE comisiones (
             nroComision INT NOT NULL,
-            fechaCreacion DATETIME NOT NULL,
+            fechaCreacion DATE NOT NULL,
             descripcion VARCHAR(50),
             PRIMARY KEY (nroComision)
             );
@@ -90,16 +90,16 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `
         INSERT INTO comisiones (nroComision, fechaCreacion, descripcion)
-        VALUES (551, '2005-02-02 09:00:00', 'Comisión A'),
-        (234, '2009-01-23 10:25:00', 'Comisión K'),
-        (125, '2010-01-21 13:15:00', 'Comisión J'),
-        (281, '2018-03-23 20:21:00', 'Comisión Q'),
-        (923, '2014-02-24 15:55:00', 'Comisión I'),
-        (123, '2013-07-12 19:23:00', 'Comisión H'),
-        (238, '2011-02-12 12:56:00', 'Comisión G'),
-        (568, '2020-07-19 11:30:00', 'Comisión F'),
-        (793, '2021-02-21 17:70:00', 'Comisión E'),
-        (357, '2023-03-01 16:50:00', 'Comisión C');
+        VALUES (551, '2005-02-02', 'Comisión A'),
+        (234, '2009-01-23', 'Comisión K'),
+        (125, '2010-01-21', 'Comisión J'),
+        (281, '2018-03-23', 'Comisión Q'),
+        (923, '2014-02-24', 'Comisión I'),
+        (123, '2013-07-12', 'Comisión H'),
+        (238, '2011-02-12', 'Comisión G'),
+        (568, '2020-07-19', 'Comisión F'),
+        (793, '2021-02-21', 'Comisión E'),
+        (357, '2023-03-01', 'Comisión C');
         `
     );
   }
@@ -120,9 +120,9 @@ async function CrearBaseSiNoExiste() {
               nroComision INT,
               fechaCreacion text,
               descripcion VARCHAR(100),
-              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
-              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE CASCADE,
-              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor) ON DELETE CASCADE,
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE SET NULL,
+              FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE SET NULL,
+              FOREIGN KEY(legajoProfesor) REFERENCES profesores (legajoProfesor) ON DELETE SET NULL,
               PRIMARY KEY(nroMateria)
               );
             `
@@ -159,8 +159,8 @@ async function CrearBaseSiNoExiste() {
               legajoAlumno INT,
               fechaExamen DATE,
               descripcion VARCHAR(100),
-              FOREIGN KEY(nroMateria) REFERENCES materias (nroMateria) ON DELETE CASCADE,
-              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
+              FOREIGN KEY(nroMateria) REFERENCES materias (nroMateria) ON DELETE SET NULL,
+              FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE SET NULL,
               PRIMARY KEY(nroMateria)
               );
             `
