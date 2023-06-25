@@ -218,16 +218,9 @@ const materias = sequelize.define(
           
     },
     {
-      // pasar a mayusculas
-      hooks: {
-        beforeValidate: function (mate, options) {
-          if (typeof mate.descripcion === "string") {
-            mate.descripcion = mate.descripcion.toUpperCase().trim();
-          }
-        },
-      },  
+      timestamps: false,  
     },
-    {timestamps: false,}
+    
 );
 
 const examenes = sequelize.define(
