@@ -5,23 +5,26 @@ const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 
 //Se realiza la solicitud de consulta mediante get, obteniendo todos los datos de todos los exámenes
-router.get("/api/examenes", async function (req, res, next) {
-  
+router.get("/api/examenes", async function (req, res, next) {  
   let where = {};
-  if (req.query.Descripcion != undefined && req.query.Descripcion !== "") {
+  if (req.query.descripcion != undefined && req.query.descripcion !== "") {
     where.descripcion = {
-      [Op.like]: "%" + req.query.Descripcion + "%",
+      [Op.like]: "%" + req.query.descripcion + "%",
     };
   }
-
-  const rows = await db.examenes.findAll({
+  const Pagina = req.query.Pagina ?? 1;
+  const TamañoPagina = 10;
+  const { count, rows } = await db.examenes.findAndCountAll({
     attributes: ["nroMateria", "legajoAlumno", "fechaExamen", "descripcion"],
     order: [["descripcion", "ASC"]],
     where,
+    offset: (Pagina - 1) * TamañoPagina,
+    limit: TamañoPagina,
   });
-  return res.json({Items: rows});
-});
 
+  return res.json({ Items: rows, RegistrosTotal: count });
+  
+});
 
 //Se realiza la solicitud para un examen en especifico, mediante el id (nroMateria)
 router.get("/api/examenes/:id", async function (req, res, next) {
