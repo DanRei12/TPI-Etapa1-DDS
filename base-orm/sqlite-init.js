@@ -157,7 +157,7 @@ async function CrearBaseSiNoExiste() {
             CREATE TABLE examenes (
               nroMateria INT,
               legajoAlumno INT,
-              fechaExamen datetime,
+              fechaExamen DATE,
               descripcion VARCHAR(100),
               FOREIGN KEY(nroMateria) REFERENCES materias (nroMateria) ON DELETE CASCADE,
               FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
