@@ -169,16 +169,16 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `
            INSERT INTO examenes (nroMateria, legajoAlumno, fechaExamen, descripcion)
-            VALUES (24, 75094, '2023-05-20 10:00:00', 'Examen de Algebra'),
-            (20, 75231, '2023-06-13 17:45:00', 'Examen de Desarrollo de Software'),
-            (10, 79023, '2023-10-25 09:30:00', 'Examen de Ciber Seguridad'),
-            (15, 80203, '2023-07-31 14:00:00', 'Examen de Física 1'),
-            (29, 82345, '2023-04-31 17:40:00', 'Examen de Física 2'),
-            (46, 82460, '2023-10-12 20:30:00', 'Examen de Química'),
-            (50, 83231, '2023-12-05 16:30:00', 'Examen de Análisis Numerico'),
-            (12, 85314, '2023-05-23 17:30:00', 'Examen de Diseño de Sistemas de Información'),
-            (9, 89412, '2023-06-15 09:00:00', 'Examen de Inglés 1'),
-            (35, 90223, '2023-05-31 11:00:00', 'Examen de Inglés 2');
+            VALUES (24, 75094, '2023-05-20', 'Examen de Algebra'),
+            (20, 75231, '2023-06-13', 'Examen de Desarrollo de Software'),
+            (10, 79023, '2023-10-25', 'Examen de Ciber Seguridad'),
+            (15, 80203, '2023-07-31', 'Examen de Física 1'),
+            (29, 82345, '2023-04-31', 'Examen de Física 2'),
+            (46, 82460, '2023-10-12', 'Examen de Química'),
+            (50, 83231, '2023-12-05', 'Examen de Análisis Numerico'),
+            (12, 85314, '2023-05-23', 'Examen de Diseño de Sistemas de Información'),
+            (9, 89412, '2023-06-15', 'Examen de Inglés 1'),
+            (35, 90223, '2023-05-31', 'Examen de Inglés 2');
             
             `
     );
