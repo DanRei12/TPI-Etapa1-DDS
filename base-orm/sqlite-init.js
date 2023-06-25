@@ -118,7 +118,7 @@ async function CrearBaseSiNoExiste() {
               legajoProfesor INT,
               legajoAlumno INT,
               nroComision INT,
-              fechaCreacion datetime,
+              fechaCreacion text,
               descripcion VARCHAR(100),
               FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE CASCADE,
               FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE CASCADE,
@@ -131,16 +131,16 @@ async function CrearBaseSiNoExiste() {
     await db.run(
       `
           INSERT INTO materias (nroMateria, legajoProfesor, legajoAlumno, nroComision, fechaCreacion, descripcion)
-          VALUES (24, 10231, 75094, 551, '2005-12-05 09:00:00', 'Algebra'),
-          (20, 11235, 75231, 234, '2010-05-20 19:00:00', 'Desarrollo de Software'),
-          (10, 12355, 79023, 125, '2009-05-10 09:34:00', 'Ciber Seguridad'),
-          (15, 15246, 80203, 281, '2002-06-10 10:23:00', 'Física 1'),
-          (29, 17235, 82345, 923, '2015-06-24 11:12:00', 'Física 2'),
-          (46, 20241, 82460, 123, '2016-05-18 15:45:00', 'Química'),
-          (50, 12345, 83231, 238, '2017-06-13 14:51:00', 'Análisis Numerico'),
-          (12, 25234, 85314, 568, '2018-05-19 13:32:00', 'Diseño de Sistemas de Información'),
-          (09, 28414, 89412, 793, '2019-05-11 20:33:00', 'Inglés 1'),
-          (35, 30123, 90223, 357, '2013-06-10 17:42:00', 'Inglés 2');
+          VALUES (24, 10231, 75094, 551, '2005-12-05', 'Algebra'),
+          (20, 11235, 75231, 234, '2010-05-20', 'Desarrollo de Software'),
+          (10, 12355, 79023, 125, '2009-05-10', 'Ciber Seguridad'),
+          (15, 15246, 80203, 281, '2002-06-10', 'Física 1'),
+          (29, 17235, 82345, 923, '2015-06-24', 'Física 2'),
+          (46, 20241, 82460, 123, '2016-05-18', 'Química'),
+          (50, 12345, 83231, 238, '2017-06-13', 'Análisis Numerico'),
+          (12, 25234, 85314, 568, '2018-05-19', 'Diseño de Sistemas de Información'),
+          (09, 28414, 89412, 793, '2019-05-11', 'Inglés 1'),
+          (35, 30123, 90223, 357, '2013-06-10', 'Inglés 2');
 
           `
     );

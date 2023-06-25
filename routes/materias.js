@@ -5,7 +5,15 @@ const { Op, ValidationError } = require("sequelize");
 
 // Obtener todas las materias
 router.get("/api/materias", async function (req, res, next) {
-  let mat = await db.materias.findAndCountAll({
+  
+  let where = {};
+  if (req.query.Descripcion != undefined && req.query.Descripcion !== "") {
+    where.descripcion = {
+      [Op.like]: "%" + req.query.Descripcion + "%",
+    };
+  }
+
+  const rows = await db.materias.findAll({
     attributes: [
       "nroMateria",
       "legajoProfesor",
@@ -14,8 +22,10 @@ router.get("/api/materias", async function (req, res, next) {
       "fechaCreacion",
       "descripcion",
     ],
+    order: [["descripcion", "ASC"]],
+    where,
   });
-  res.json(mat);
+  return res.json({Items: rows});
 });
 
 // Obtener materia según id

@@ -203,7 +203,7 @@ const materias = sequelize.define(
             },
           },
           fechaCreacion: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
               notEmpty: {
@@ -215,7 +215,19 @@ const materias = sequelize.define(
           descripcion: {
             type: DataTypes.STRING(100),
           },
-    },{timestamps: false,}
+          
+    },
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (mate, options) {
+          if (typeof mate.descripcion === "string") {
+            mate.descripcion = mate.descripcion.toUpperCase().trim();
+          }
+        },
+      },  
+    },
+    {timestamps: false,}
 );
 
 const examenes = sequelize.define(
