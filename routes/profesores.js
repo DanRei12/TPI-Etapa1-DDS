@@ -2,38 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
-//const auth = require("../seguridad/auth");
 
-/*
-
-//Bloque de la solicitud get, debe devolver todos los profesores en la tabla.
-router.get("/api/profesores", async function (req, res, next) {  
-    let where = {};
-    if (req.query.nombre != undefined && req.query.nombre !== "") {
-      where.nombre = {
-        [Op.like]: "%" + req.query.nombre + "%",
-      };
-    }
-    const Pagina = req.query.Pagina ?? 1;
-    const TamañoPagina = 10;
-    const { count, rows } = await db.profesores.findAndCountAll({
-      attributes: [
-        "legajoProfesor",
-        "nombre",
-        "apellido",
-        "descripcion",       
-      ],
-      order: [["Nombre", "ASC"]],
-      where,
-      offset: (Pagina - 1) * TamañoPagina,
-      limit: TamañoPagina,
-    });
-
-    return res.json({ Prof: rows, RegistrosTotal: count });
-    
-  });
-
-  */
+ /*
 
   router.get("/api/profesores", async function (req, res, next) {
   
@@ -59,6 +29,30 @@ router.get("/api/profesores", async function (req, res, next) {
     return res.json({Items: rows});
   });
   
+*/
+
+router.get("/api/profesores", async function (req, res, next) {  
+  let where = {};
+  if (req.query.descripcion != undefined && req.query.descripcion !== "") {
+    where.descripcion = {
+      [Op.like]: "%" + req.query.descripcion + "%",
+    };
+  }
+  const Pagina = req.query.Pagina ?? 1;
+  const TamañoPagina = 10;
+  const { count, rows } = await db.profesores.findAndCountAll({
+    attributes: ["legajoProfesor", "nombre", "apellido", "descripcion"],
+    order: [["descripcion", "ASC"]],
+    where,
+    offset: (Pagina - 1) * TamañoPagina,
+    limit: TamañoPagina,
+  });
+
+  return res.json({ Items: rows, RegistrosTotal: count });
+  
+});
+
+
 
 //Bloque de la solicitud get por id, debe devolver el profesor especifico mediante el legajo enviado por parametro
   router.get("/api/profesores/:legajoProfesor", async function (req, res, next) {
