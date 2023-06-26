@@ -2,57 +2,61 @@ const express = require("express");
 const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
+//const auth = require("../seguridad/auth");
 
- /*
-
-  router.get("/api/profesores", async function (req, res, next) {
-  
+/*
+//Bloque de la solicitud get, debe devolver todos los profesores en la tabla.
+router.get("/api/profesores", async function (req, res, next) {  
     let where = {};
-    if (req.query.descripcion != undefined && req.query.descripcion !== "") {
-      where.descripcion = {
-        [Op.like]: "%" + req.query.descripcion + "%",
+    if (req.query.nombre != undefined && req.query.nombre !== "") {
+      where.Nombre = {
+        [Op.like]: "%" + req.query.nombre + "%",
       };
     }
-  
-    const rows = await db.profesores.findAll({
+    const Pagina = req.query.Pagina ?? 1;
+    const TamañoPagina = 10;
+    const { count, rows } = await db.profesores.findAndCountAll({
       attributes: [
         "legajoProfesor",
         "nombre",
         "apellido",
-        "descripcion",
+        "descripcion",       
       ],
-      order: [["descripcion", "ASC"]],
+      order: [["Nombre", "ASC"]],
       where,
       offset: (Pagina - 1) * TamañoPagina,
       limit: TamañoPagina,
     });
-    return res.json({Items: rows});
-  });
-  
-*/
 
-router.get("/api/profesores", async function (req, res, next) {  
-  let where = {};
-  if (req.query.descripcion != undefined && req.query.descripcion !== "") {
-    where.descripcion = {
-      [Op.like]: "%" + req.query.descripcion + "%",
-    };
-  }
-  const Pagina = req.query.Pagina ?? 1;
-  const TamañoPagina = 10;
-  const { count, rows } = await db.profesores.findAndCountAll({
-    attributes: ["legajoProfesor", "nombre", "apellido", "descripcion"],
-    order: [["descripcion", "ASC"]],
-    where,
-    offset: (Pagina - 1) * TamañoPagina,
-    limit: TamañoPagina,
+    return res.json({ Profesores: rows, RegistrosTotal: count });
+    
   });
 
-  return res.json({ Items: rows, RegistrosTotal: count });
+  */
+  router.get("/api/profesores", async function (req, res) {
+    // consulta de profesores con filtros y paginacion
   
-});
-
-
+    let where = {};
+    if (req.query.apellido != undefined && req.query.apellido !== "") {
+      where.apellido = {
+        [Op.like]: "%" + req.query.apellido + "%",
+      };
+    }
+    
+    let prof = await db.profesores.findAndCountAll({
+      attributes: [
+        "legajoProfesor",
+        "nombre",
+        "apellido",
+        "descripcion", 
+      ],
+      order: [["apellido", "ASC"]],
+      where,
+    });
+  
+    res.json(prof.rows);
+  });
+  
 
 //Bloque de la solicitud get por id, debe devolver el profesor especifico mediante el legajo enviado por parametro
   router.get("/api/profesores/:legajoProfesor", async function (req, res, next) {

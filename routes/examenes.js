@@ -12,17 +12,14 @@ router.get("/api/examenes", async function (req, res, next) {
       [Op.like]: "%" + req.query.descripcion + "%",
     };
   }
-  const Pagina = req.query.Pagina ?? 1;
-  const TamañoPagina = 10;
-  const { count, rows } = await db.examenes.findAndCountAll({
+
+  const rows = await db.examenes.findAll({
     attributes: ["nroMateria", "legajoAlumno", "fechaExamen", "descripcion"],
     order: [["descripcion", "ASC"]],
     where,
-    offset: (Pagina - 1) * TamañoPagina,
-    limit: TamañoPagina,
   });
 
-  return res.json({ Items: rows, RegistrosTotal: count });
+  return res.json({ Items: rows});
   
 });
 
