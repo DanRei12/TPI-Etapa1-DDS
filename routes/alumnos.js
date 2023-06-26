@@ -6,7 +6,7 @@ const { Op, ValidationError } = require("sequelize");
 
 
 
-router.get("/api/alumnos", async function (req, res) {
+/*router.get("/api/alumnos", async function (req, res) {
   // consulta de alumnos con filtros y paginacion
 
   let where = {};
@@ -29,6 +29,27 @@ router.get("/api/alumnos", async function (req, res) {
   });
 
   res.json(items.rows);
+});*/
+
+router.get("/api/alumnos", async function (req, res, next) {  
+  let where = {};
+  if (req.query.apellido != undefined && req.query.apellido !== "") {
+    where.apellido = {
+      [Op.like]: "%" + req.query.apellido + "%",
+    };
+  }
+  const Pagina = req.query.Pagina ?? 1;
+  const TamañoPagina = 10;
+  const { count, rows } = await db.alumnos.findAndCountAll({
+    attributes: ["legajoAlumno", "nombre", "apellido","fechaInscripcion", "descripcion"],
+    order: [["apellido", "ASC"]],
+    where,
+    offset: (Pagina - 1) * TamañoPagina,
+    limit: TamañoPagina,
+  });
+
+  return res.json({ Items: rows, RegistrosTotal: count });
+  
 });
 
 
