@@ -2,34 +2,7 @@ const db = require("../base-orm/sequelize-init");
 const express = require("express");
 const router = express.Router();
 const { Op, ValidationError } = require("sequelize");
-//const auth = require("../seguridad/auth");
 
-
-
-/*router.get("/api/alumnos", async function (req, res) {
-  // consulta de alumnos con filtros y paginacion
-
-  let where = {};
-  if (req.query.nombre != undefined && req.query.nombre !== "") {
-    where.nombre = {
-      [Op.like]: "%" + req.query.nombre + "%",
-    };
-  }
-  
-  let items = await db.alumnos.findAndCountAll({
-    attributes: [
-      "legajoAlumno",
-      "nombre",
-      "apellido",
-      "fechaInscripcion",
-      "descripcion",
-    ],
-    order: [["nombre", "ASC"]],
-    where,
-  });
-
-  res.json(items.rows);
-});*/
 
 router.get("/api/alumnos", async function (req, res, next) {  
   let where = {};
@@ -53,38 +26,6 @@ router.get("/api/alumnos", async function (req, res, next) {
 });
 
 
-
-
-/*
-//Bloque de la solicitud get, debe devolver todos los alumnos en la tabla.
-router.get("/api/alumnos", async function (req, res, next) {
-    let where = {};
-    if (req.query.nombre != undefined && req.query.nombre !== "") {
-      where.Nombre = {
-        [Op.like]: "%" + req.query.nombre + "%",
-      };
-    }
-    const Pagina = req.query.Pagina ?? 1;
-    const TamañoPagina = 10;
-    const { count, rows } = await db.alumnos.findAndCountAll({
-      attributes: [
-        "legajoAlumno",
-        "nombre",
-        "apellido",
-        "fechaInscripcion",
-        "descripcion",       
-      ],
-      order: [["Nombre", "ASC"]],
-      where,
-      offset: (Pagina - 1) * TamañoPagina,
-      limit: TamañoPagina,
-    });
-
-    return res.json({ Alumnos: rows, RegistrosTotal: count });
-    
-  });
-
-  */
 
 //Bloque de la solicitud get por id, debe devolver el alumno especifico mediante el legajo enviado por parametro
 router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {

@@ -59,12 +59,15 @@ const alumnos = sequelize.define(
     {
       // pasar a mayusculas
       hooks: {
-        beforeValidate: function (socios, options) {
-          if (typeof socios.nombre === "string") {
-            socios.nombre = socios.nombre.toUpperCase().trim();
+        beforeValidate: function (alumnos, options) {
+          if (typeof alumnos.nombre === "string") {
+            alumnos.nombre = alumnos.nombre.toUpperCase().trim();
           }
-          if (typeof socios.apellido === "string") {
-            socios.apellido = socios.apellido.toUpperCase().trim();
+          if (typeof alumnos.apellido === "string") {
+            alumnos.apellido = alumnos.apellido.toUpperCase().trim();
+          }
+          if (typeof alumnos.descripcion === "string") {
+            alumnos.descripcion = alumnos.descripcion.toUpperCase().trim();
           }
         },
       },
@@ -112,7 +115,24 @@ const profesores = sequelize.define(
 
     }, {
       timestamps: false,
+    },
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (profesores, options) {
+          if (typeof profesores.nombre === "string") {
+            profesores.nombre = profesores.nombre.toUpperCase().trim();
+          }
+          if (typeof profesores.apellido === "string") {
+            profesores.apellido = profesores.apellido.toUpperCase().trim();
+          }
+          if (typeof profesores.descripcion === "string") {
+            profesores.descripcion = profesores.descripcion.toUpperCase().trim();
+          }
+        },
+      },
     }
+
 );
 
 const comisiones = sequelize.define(
@@ -143,7 +163,17 @@ const comisiones = sequelize.define(
           descripcion: {
             type: DataTypes.STRING(50),
           },
-    }, {timestamps: false,}
+    }, {timestamps: false,},
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (comisiones, options) {
+          if (typeof comisiones.descripcion === "string") {
+            comisiones.descripcion = comisiones.descripcion.toUpperCase().trim();
+          }
+        },
+      },
+    }
 );
 
 const materias = sequelize.define(
@@ -220,6 +250,16 @@ const materias = sequelize.define(
     {
       timestamps: false,  
     },
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (materias, options) {
+          if (typeof materias.descripcion === "string") {
+            materias.descripcion = materias.descripcion.toUpperCase().trim();
+          }
+        },
+      },
+    }
     
 );
 
@@ -271,6 +311,16 @@ const examenes = sequelize.define(
     },
     {
       timestamps: false,
+    },
+    {
+      // pasar a mayusculas
+      hooks: {
+        beforeValidate: function (examenes, options) {
+          if (typeof examenes.descripcion === "string") {
+            examenes.descripcion = examenes.descripcion.toUpperCase().trim();
+          }
+        },
+      },
     }
 );
 

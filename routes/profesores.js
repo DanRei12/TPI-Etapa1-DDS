@@ -3,33 +3,6 @@ const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 
- /*
-
-  router.get("/api/profesores", async function (req, res, next) {
-  
-    let where = {};
-    if (req.query.descripcion != undefined && req.query.descripcion !== "") {
-      where.descripcion = {
-        [Op.like]: "%" + req.query.descripcion + "%",
-      };
-    }
-  
-    const rows = await db.profesores.findAll({
-      attributes: [
-        "legajoProfesor",
-        "nombre",
-        "apellido",
-        "descripcion",
-      ],
-      order: [["descripcion", "ASC"]],
-      where,
-      offset: (Pagina - 1) * TamañoPagina,
-      limit: TamañoPagina,
-    });
-    return res.json({Items: rows});
-  });
-  
-*/
 
 router.get("/api/profesores", async function (req, res, next) {  
   let where = {};
