@@ -33,38 +33,6 @@ router.get("/api/alumnos", async function (req, res) {
 
 
 
-
-/*
-//Bloque de la solicitud get, debe devolver todos los alumnos en la tabla.
-router.get("/api/alumnos", async function (req, res, next) {
-    let where = {};
-    if (req.query.nombre != undefined && req.query.nombre !== "") {
-      where.Nombre = {
-        [Op.like]: "%" + req.query.nombre + "%",
-      };
-    }
-    const Pagina = req.query.Pagina ?? 1;
-    const TamañoPagina = 10;
-    const { count, rows } = await db.alumnos.findAndCountAll({
-      attributes: [
-        "legajoAlumno",
-        "nombre",
-        "apellido",
-        "fechaInscripcion",
-        "descripcion",       
-      ],
-      order: [["Nombre", "ASC"]],
-      where,
-      offset: (Pagina - 1) * TamañoPagina,
-      limit: TamañoPagina,
-    });
-
-    return res.json({ Alumnos: rows, RegistrosTotal: count });
-    
-  });
-
-  */
-
 //Bloque de la solicitud get por id, debe devolver el alumno especifico mediante el legajo enviado por parametro
 router.get("/api/alumnos/:legajoAlumno", async function (req, res, next) {
    let alumno1 = await db.alumnos.findOne({

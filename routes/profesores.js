@@ -4,35 +4,7 @@ const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 //const auth = require("../seguridad/auth");
 
-/*
-//Bloque de la solicitud get, debe devolver todos los profesores en la tabla.
-router.get("/api/profesores", async function (req, res, next) {  
-    let where = {};
-    if (req.query.nombre != undefined && req.query.nombre !== "") {
-      where.Nombre = {
-        [Op.like]: "%" + req.query.nombre + "%",
-      };
-    }
-    const Pagina = req.query.Pagina ?? 1;
-    const TamañoPagina = 10;
-    const { count, rows } = await db.profesores.findAndCountAll({
-      attributes: [
-        "legajoProfesor",
-        "nombre",
-        "apellido",
-        "descripcion",       
-      ],
-      order: [["Nombre", "ASC"]],
-      where,
-      offset: (Pagina - 1) * TamañoPagina,
-      limit: TamañoPagina,
-    });
 
-    return res.json({ Profesores: rows, RegistrosTotal: count });
-    
-  });
-
-  */
   router.get("/api/profesores", async function (req, res) {
     // consulta de profesores con filtros y paginacion
   
