@@ -1,21 +1,12 @@
 const request = require("supertest");
 const app = require("../index");
 
-const nuevaMateria = {
-    NumeroMateria: 200,
-    LegProfesor: 11235,
-    LegAlumno: 79023,
-    NumeroComision: 234,
-    FechaCreacion: new Date().toISOString(),
-    Descripcion: "Matematica",
-};
-
 const materiaModificacion = {
     nroMateria: 24,
     legajoProfesor: 10231,
     legajoAlumno: 75094,
     nroComision: 551,
-    fechaCreacion: '12-05-2005 09:00:00',
+    fechaCreacion: new Date().toISOString(),
     descripcion: "Matematica",
 }
 
@@ -26,7 +17,7 @@ describe("GET /api/materias", function () {
         expect(res.statusCode).toEqual(200);
         expect(res.body).toEqual(
             expect.objectContaining({
-                rows: expect.arrayContaining([
+                Items: expect.arrayContaining([
                     expect.objectContaining({
                         nroMateria: expect.any(Number),
                         legajoProfesor: expect.any(Number),
@@ -36,7 +27,7 @@ describe("GET /api/materias", function () {
                         descripcion: expect.any(String),
                     }),
                 ]),
-                count: expect.any(Number) 
+                RegistrosTotal: expect.any(Number) 
             })
         );
     });
@@ -67,7 +58,7 @@ describe("POST /api/materias", () => {
         legajoAlumno: 81211,
         nombre: "Kylian",
         apellido: "Mbappé",
-        fechaInscripcion: "2021-04-30T14:00:00.000Z",
+        fechaInscripcion: new Date().toISOString(),
         descripcion: "Alumno Excelente",
       };
       const materia = {
@@ -86,7 +77,7 @@ describe("POST /api/materias", () => {
       };
       const comision = {
         nroComision: 239,
-        fechaCreacion: "2002-07-31T14:00:00.000Z",
+        fechaCreacion: new Date().toISOString(),
         descripcion: "Comision Z",
       };
   

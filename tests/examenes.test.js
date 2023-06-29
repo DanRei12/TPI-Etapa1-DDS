@@ -4,18 +4,18 @@ const app = require("../index");
 const examenModificacion = {
   nroMateria: 15,
   legajoAlumno: 80203,
-  fechaExamen: "2023-07-31T14:00:00.000Z",
-  descripcion: "Exámen de PAV",
+  fechaExamen: new Date().toISOString(),
+  descripcion: "Examen de PAV",
 };
 
 describe("GET /api/examenes", () => {
   it("Deberia devolver todos los examenes", async () => {
     const res = await request(app).get("/api/examenes");
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toBeInstanceOf(Array);
+    expect(res.body.Items).toBeInstanceOf(Array);
 
     // Verificar la estructura de cada examen en la respuesta
-    res.body.forEach((examen) => {
+    res.body.Items.forEach((examen) => {
       expect(examen).toHaveProperty("nroMateria");
       expect(examen).toHaveProperty("legajoAlumno");
       expect(examen).toHaveProperty("fechaExamen");
@@ -44,14 +44,14 @@ describe("POST /api/examenes", () => {
     const examen = {
       nroMateria: 200,
       legajoAlumno: 84211,
-      fechaExamen: "2023-07-21T14:00:00.000Z",
+      fechaExamen: new Date().toISOString(),
       descripcion: "Examen de Algebra",
     };
     const alumno = {
       legajoAlumno: 84211,
       nombre: "Jeiner",
       apellido: "Sanchez",
-      fechaInscripcion: "2021-04-30T14:00:00.000Z",
+      fechaInscripcion: new Date().toISOString(),
       descripcion: "Buen estudiante",
     };
     const materia = {
@@ -59,7 +59,7 @@ describe("POST /api/examenes", () => {
       legajoProfesor: 11235,
       legajoAlumno: 84211,
       nroComision: 234,
-      fechaCreacion: "2009-11-11T15:00:00.000Z",
+      fechaCreacion: new Date().toISOString(),
       descripcion: "Hidrologia",
     };
     const profesor = {
@@ -70,7 +70,7 @@ describe("POST /api/examenes", () => {
     };
     const comision = {
       nroComision: 234,
-      fechaCreacion: "2002-07-31T14:00:00.000Z",
+      fechaCreacion: new Date().toISOString(),
       descripcion: "Comision U",
     };
 

@@ -11,10 +11,10 @@ describe("GET /api/comisiones", () => {
     it("debería devolver todos los comisiones", async () => {
         const res = await request(app).get("/api/comisiones");
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toBeInstanceOf(Array);
+        expect(res.body.Items).toBeInstanceOf(Array);
 
         // Verificar la estructura de cada comision en la respuesta
-        res.body.forEach((comision) => {
+        res.body.Items.forEach((comision) => {
             expect(comision).toHaveProperty('nroComision');
             expect(comision).toHaveProperty('fechaCreacion');
             expect(comision).toHaveProperty('descripcion');

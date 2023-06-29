@@ -4,6 +4,7 @@ const db = require("aa-sqlite");
 async function CrearBaseSiNoExiste() {
   // abrir base, si no existe el archivo/base lo crea
   await db.open("./.data/BD-Tpi-DDS.db");
+  //Desactiva temporalmente las fk para poder borrar registros que sean usados por otras tablas
   await db.run("PRAGMA foreign_keys = OFF");
 
   let existe = false;
@@ -27,7 +28,7 @@ async function CrearBaseSiNoExiste() {
       (85314, 'Laura', 'Torres', '2020-11-27', 'Estudiante promedio'),
       (90223, 'Diego', 'Damiani', '2021-11-30', 'Estudiante promedio'),
       (75231, 'Sofía', 'Palacios', '2017-11-28', 'Estudiante destacado'),
-      (75094, 'javier', 'Valdez', '2017-12-01', 'Estudiante destacado'),
+      (75094, 'Javier', 'Valdez', '2017-12-01', 'Estudiante destacado'),
       (91456, 'Valeria', 'Molinas', '2021-11-05', 'Estudiante promedio'),
       (89412, 'Joaquín', 'Pelosi', '2020-11-19', 'Estudiante destacado');  
       `
@@ -118,7 +119,7 @@ async function CrearBaseSiNoExiste() {
               legajoProfesor INT,
               legajoAlumno INT,
               nroComision INT,
-              fechaCreacion text,
+              fechaCreacion date,
               descripcion VARCHAR(100),
               FOREIGN KEY(legajoAlumno) REFERENCES alumnos (legajoAlumno) ON DELETE SET NULL,
               FOREIGN KEY(nroComision) REFERENCES comisiones (nroComision) ON DELETE SET NULL,
@@ -173,7 +174,7 @@ async function CrearBaseSiNoExiste() {
             (20, 75231, '2023-06-13', 'Examen de Desarrollo de Software'),
             (10, 79023, '2023-10-25', 'Examen de Ciber Seguridad'),
             (15, 80203, '2023-07-31', 'Examen de Física 1'),
-            (29, 82345, '2023-04-31', 'Examen de Física 2'),
+            (29, 82345, '2023-04-30', 'Examen de Física 2'),
             (46, 82460, '2023-10-12', 'Examen de Química'),
             (50, 83231, '2023-12-05', 'Examen de Análisis Numerico'),
             (12, 85314, '2023-05-23', 'Examen de Diseño de Sistemas de Información'),
@@ -183,6 +184,8 @@ async function CrearBaseSiNoExiste() {
             `
     );
   }
+  
+  //Activa nuevamente las fk
   await db.run("PRAGMA foreign_keys = ON");
   db.close();
 }

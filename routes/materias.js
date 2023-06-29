@@ -3,9 +3,9 @@ const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 
-// Obtener todas las materias
+// Obtener las materias
 router.get("/api/materias", async function (req, res, next) {
-  
+  //Consulta de materias utilizando filtro y paginación
   let where = {};
   if (req.query.Descripcion != undefined && req.query.Descripcion !== "") {
     where.descripcion = {
@@ -13,7 +13,25 @@ router.get("/api/materias", async function (req, res, next) {
     };
   }
 
-  const rows = await db.materias.findAll({
+  //Instrucción utilizada para devolver todos los registros, utilizada en el front para registrar un nuevo elemento que utilice como fk a materia
+  if (req.query.Pagina == -1) {
+    const rows = await db.materias.findAll({
+      attributes: [
+        "nroMateria",
+        "legajoProfesor",
+        "legajoAlumno",
+        "nroComision",
+        "fechaCreacion",
+        "descripcion",
+      ],
+      order: [["descripcion", "ASC"]],
+      where,
+    });
+    return res.json({ Items: rows });
+  }
+  const Pagina = req.query.Pagina ?? 1;
+  const TamañoPagina = 10;
+  const { count, rows } = await db.materias.findAndCountAll({
     attributes: [
       "nroMateria",
       "legajoProfesor",
@@ -24,8 +42,10 @@ router.get("/api/materias", async function (req, res, next) {
     ],
     order: [["descripcion", "ASC"]],
     where,
+    offset: (Pagina - 1) * TamañoPagina,
+    limit: TamañoPagina,
   });
-  return res.json({Items: rows});
+  return res.json({ Items: rows, RegistrosTotal: count });
 });
 
 // Obtener materia según id
@@ -109,7 +129,7 @@ router.put("/api/materias/:nroMateria", async (req, res) => {
 
 // Eliminacion de una materia
 router.delete("/api/materias/:nroMateria", async (req, res) => {
-    let borradoFila = await db.materias.destroy({
+  let borradoFila = await db.materias.destroy({
     where: { nroMateria: req.params.nroMateria },
   });
   if (borradoFila == 1) res.sendStatus(200);

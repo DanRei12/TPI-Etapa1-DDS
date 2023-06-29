@@ -1,42 +1,24 @@
 const request = require("supertest");
 const app = require("../index");
-const alumnoAlta = {
-  LegajoAlumno: 79024,
-  Nombre: "Mirko",  // Genera un nombre aleatorio
-  Apellido: "Ronaldo",  // Genera un nombre aleatorio
-  FechaInscripcion: "2021-07-31T15:00:00.000Z",
-  Descripcion: "Estudiante sobresaliente",  // Genera un nombre aleatorio
-  
-};
+
+//Harcodeo de un alumno para probar la solicitud PUT
 const alumnoModificacion = {
     legajoAlumno: 79023,
-    nombre: "Mari",  
+    nombre: "Maria",  
     apellido: "Closs",  
     fechaInscripcion: new Date().toISOString(),
-    descripcion: "Un muy buen estudiante",
+    descripcion: "Una muy buen estudiante",
 };
-
-function generateRandomString(length) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
 
 // test route/alumnos GET
 describe("GET /api/alumnos", () => {
   it("Deberia devolver todos los alumnos", async () => {
     const res = await request(app).get("/api/alumnos");
     expect(res.statusCode).toEqual(200);
-    expect(res.body.Alumnos).toBeInstanceOf(Array);
+    expect(res.body.Items).toBeInstanceOf(Array);
 
     // Verificar la estructura de cada examen en la respuesta
-    res.body.Alumnos.forEach((alumno) => {
+    res.body.Items.forEach((alumno) => {
       expect(alumno).toHaveProperty("apellido");
       expect(alumno).toHaveProperty("descripcion");
       expect(alumno).toHaveProperty("fechaInscripcion");
@@ -68,8 +50,8 @@ describe("POST /api/alumnos", () => {
   it("Debería agregar un nuevo alumno", async () => {
     const nuevoAlumno = {
       legajoAlumno: 12346,
-      nombre: "Juan",
-      apellido: "Pérez",
+      nombre: "Jaimito",
+      apellido: "Rodriguez",
       fechaInscripcion: new Date(2022, 1, 1),
       descripcion: "Estudiante destacado",
     };

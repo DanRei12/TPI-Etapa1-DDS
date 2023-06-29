@@ -20,10 +20,10 @@ describe("GET /api/profesores", () => {
   it("Deberia devolver todos los profesores", async () => {
     const res = await request(app).get("/api/profesores");
     expect(res.statusCode).toEqual(200);
-    expect(res.body.Profesores).toBeInstanceOf(Array);
+    expect(res.body.Items).toBeInstanceOf(Array);
 
     // Verificar la estructura de cada examen en la respuesta
-    res.body.Profesores.forEach((profe) => {
+    res.body.Items.forEach((profe) => {
       expect(profe).toHaveProperty("legajoProfesor");
       expect(profe).toHaveProperty("nombre");
       expect(profe).toHaveProperty("apellido");

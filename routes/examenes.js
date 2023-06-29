@@ -4,8 +4,10 @@ const router = express.Router();
 const db = require("../base-orm/sequelize-init");
 const { Op, ValidationError } = require("sequelize");
 
-//Se realiza la solicitud de consulta mediante get, obteniendo todos los datos de todos los exámenes
+
+//Se realiza la solicitud de consulta mediante get
 router.get("/api/examenes", async function (req, res, next) {  
+  //Consulta de examenes usando filtro y paginación
   let where = {};
   if (req.query.descripcion != undefined && req.query.descripcion !== "") {
     where.descripcion = {
@@ -22,7 +24,7 @@ router.get("/api/examenes", async function (req, res, next) {
     limit: TamañoPagina,
   });
 
-  return res.json({ Items: rows, RegistrosTotal: count });
+  return res.json({ Items: rows, RegistrosTotal: count});
   
 });
 
